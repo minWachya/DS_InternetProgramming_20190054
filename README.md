@@ -1,1 +1,2 @@
-"# DS_InternetProgramming_20190054"  git init git add README.md git commit -m "first commit" git branch -M main git remote add origin https://github.com/minWachya/DS_InternetProgramming_20190054.git git push -u origin main
+### 덕성여대 인터넷 프로그래밍 기말 프로젝트
+# 20190054 컴퓨터공학과 이민영

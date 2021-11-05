@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from .models import PackageTour
+from django.views.generic import ListView, DetailView
 # Create your views here.
 
 
@@ -7,5 +9,6 @@ def index(request) :
    return render(request,'tour/index.html')
 
 
-def index1(request) :
-   return render(request,'tour/index1.html')
+class PackageTourList(ListView):
+   model = PackageTour
+   ordering = '-pk'

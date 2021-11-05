@@ -16,9 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # 서버ip/
     # path('', include('tour.urls')),
     path('tour/', include('tour.urls')),
 ]
+# ip 주소 외 이미지 접근하려는 선언 추가
+# 서버IP/media
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

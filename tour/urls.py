@@ -6,4 +6,5 @@ urlpatterns = [
     # FBV 방법
     # 서버ip/tour
     path('', views.index),
+    path('test', views.index1),
 ]

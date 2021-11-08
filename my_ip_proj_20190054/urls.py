@@ -21,9 +21,12 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # 서버ip/
-    # path('', include('tour.urls')),
+
+    # 서버ip/tour/~
     path('tour/', include('tour.urls')),
+
+    # 서버ip/my_page/~
+    path('my_page/', include('my_page.urls')),
 ]
 # ip 주소 외 이미지 접근하려는 선언 추가
 # 서버IP/media

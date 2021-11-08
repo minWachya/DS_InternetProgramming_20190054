@@ -12,3 +12,7 @@ def index(request) :
 class PackageTourList(ListView):
    model = PackageTour
    ordering = '-pk'
+
+
+def testTicket(request):
+   return render(request, 'tour/test.html')

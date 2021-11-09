@@ -27,6 +27,9 @@ urlpatterns = [
 
     # 서버ip/my_page/~
     path('my_page/', include('my_page.urls')),
+
+    # 마크다운
+    path('markdownx/', include('markdownx.urls')),
 ]
 # ip 주소 외 이미지 접근하려는 선언 추가
 # 서버IP/media

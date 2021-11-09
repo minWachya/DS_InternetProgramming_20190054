@@ -38,9 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'tour',
     'my_page',
+
+    'crispy_forms',
+    'markdownx',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -126,6 +131,8 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # 실제 이미지 저장된 장소
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

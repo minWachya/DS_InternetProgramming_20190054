@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import PackageTour, Category, Tag
+from markdownx.admin import MarkdownxModelAdmin
 
 # Register your models here.
 
 
-# PackageTour 등록
-admin.site.register(PackageTour)
+# PackageTour 등록 + 마크다운
+admin.site.register(PackageTour, MarkdownxModelAdmin)
 
 # Category 등록
 # slug 필드는 자동 등록

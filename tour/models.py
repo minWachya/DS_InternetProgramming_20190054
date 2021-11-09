@@ -1,5 +1,7 @@
 from django.db import models
 import os
+from markdownx.utils import markdown
+from markdownx.models import MarkdownxField
 
 # Create your models here.
 
@@ -40,7 +42,7 @@ class PackageTour(models.Model) :
     # 여행 이름
     tour_name = models.CharField(max_length=50)
     # 내용 (무한대. 길이제한 없음)
-    tour_content = models.TextField()
+    tour_content = MarkdownxField()
     # 사진
     tour_image = models.ImageField(upload_to='tour/images/%Y/%m/%d')
     # 가격
@@ -69,3 +71,7 @@ class PackageTour(models.Model) :
     # 상세 페이지랑 연결
     def get_absolute_url(self):
         return f'/tour/list/{self.pk}'
+
+    # content 내용을 마크다운으로 변경해주는 함수
+    def get_content_markdown(self):
+        return markdown(self.tour_content)

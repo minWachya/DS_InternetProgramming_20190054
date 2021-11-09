@@ -13,12 +13,15 @@
 				</div>
 				<div class="row row-bottom-padded-md">
 					<div class="col-md-12 animate-box">
-						<h2 class="heading-title">여행 상세 정보</h2>
+						<h2 class="heading-title">
+							여행 상세 정보
+							<button type="button" class="btn btn-primary btn-outline btn-lg" onclick="location.href='/tour/update/{{ packagetour.pk }}/'">수정</button>
+						</h2>
 					</div>
 					<!--패키지 여행 설명-->
 					<div class="col-md-6 animate-box">
 						<div class="row">
-							{{ packagetour.tour_content }}
+							{{ packagetour.get_content_markdown | safe }}
 						</div>
 					</div>
 					<!--패키지 여행 이미지-->

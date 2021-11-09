@@ -1,0 +1,31 @@
+{% extends 'tour/base.html' %}
+
+{% block main_area %}
+    <div id="fh5co-tours" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<!--여행 제목-->
+						<h3>{{ packagetour.tour_name }}</h3>
+						<!--여행 소개-->
+						<p>{{ packagetour.head_text }}</p>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-12 animate-box">
+						<h2 class="heading-title">여행 상세 정보</h2>
+					</div>
+					<!--패키지 여행 설명-->
+					<div class="col-md-6 animate-box">
+						<div class="row">
+							{{ packagetour.tour_content }}
+						</div>
+					</div>
+					<!--패키지 여행 이미지-->
+					<div class="col-md-6 animate-box">
+						<img class="img-responsive" src="{{ packagetour.tour_image.url }}" alt="travel">
+					</div>
+				</div>
+			</div>
+	</div>
+{% endblock %}

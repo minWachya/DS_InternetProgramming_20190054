@@ -9,9 +9,15 @@ def index(request) :
    return render(request,'tour/index.html')
 
 
+# CBV 방법
+# 패키지 여행 목록 페이지
 class PackageTourList(ListView):
    model = PackageTour
    ordering = '-pk'
+
+# 패키지 여행 상세 페이지
+class PackageTourDetail(DetailView) :
+    model = PackageTour
 
 
 def testTicket(request):

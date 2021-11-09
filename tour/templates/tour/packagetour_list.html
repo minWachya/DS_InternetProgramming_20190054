@@ -1,54 +1,45 @@
 {% extends 'tour/base.html' %}
 
+<div class="container">
 {% block main_area %}
 
 <!--패키지 여행이 있으면-->
     {% if packagetour_list.exists %}
-
-        <!--패키지 갯수만큼 반복하기-->
-        {% for tour in packagetour_list %}
-    <!--        <img src="{{ tour.head_image }}">-->
-
-            <!--티켓 시작-->
-            <div class="cardWrap">
-                <div class="card cardLeft">
-                    <h1>[하나투어]<span>{{ tour.tour_name }}</span></h1>
-                    <div class="title">
-                        <span>여행 소개</span>
-                        <h2>{{ tour.head_text }}</h2>
+        <div id="fh5co-car" class="fh5co-section-gray">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                            <h3>패키지 여행 목록</h3>
+                            <p>다양한 패키지 여행 정보들을 확인할 수 있습니다.</p>
+                        </div>
                     </div>
+                    <div class="row row-bottom-padded-md">
 
-                    <div class="name">
-                        <span>가격</span>
-                        <h2>{{ tour.tour_price }}</h2>
-                    </div>
+                <!--패키지 갯수만큼 반복하기-->
+                {% for tour in packagetour_list %}
+                <div class="col-md-6 animate-box">
+                    <div class="car">
+                        <div class="one-4">
+                            <h3>{{ tour.tour_name }}</h3>
+                            <p>{{ tour.head_text }}</p>
+                            <p>{{ tour.tour_start_day | date:"20y-m-d" }}</p>
+                            <p>{{ tour.tour_end_day | date:"20y-m-d" }}</p>
 
-                    <div class="seat">
-                        <span>여행 시작일</span>
-                        <h2>{{ tour.tour_start_day | date:"20y-m-d" }}</h2>
-                    </div>
+                            <span class="price">{{ tour.tour_price }}<small>원</small></span>
 
-                    <div class="time">
-                        <span>여행 종료일</span>
-                        <h2>{{ tour.tour_end_day | date:"20y-m-d" }}</h2>
+                            <a class="btn btn-primary" href="{{ tour.get_absolute_url }}">자세히 →</a>
+                        </div>
+                        <div class="one-1" style="background-image: url({{ tour.head_image.url }});">
+                        </div>
                     </div>
                 </div>
-
-                <div class="card cardRight">
-                    <div class="eye"></div>
-                    <div class="number">
-                        <h3>156</h3>
-                        <span>seat</span>
-                    </div>
-                    <div class="barcode"></div>
+                {% endfor %}
                 </div>
-
-            </div>
-            <!--티켓 끝-->
-        {% endfor %}
-
+			</div>
+		</div>
     {% else %}
         <h2>아직 게시물이 없습니다.</h2>
     {% endif %}
 
 {% endblock %}
+</div>

@@ -68,4 +68,4 @@ class PackageTour(models.Model) :
 
     # 상세 페이지랑 연결
     def get_absolute_url(self):
-        return f'/tour/{self.pk}'
+        return f'/tour/list/{self.pk}'

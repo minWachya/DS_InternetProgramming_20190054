@@ -1,0 +1,38 @@
+{% extends 'tour/base_no_header.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}Edit Tour{% endblock %}
+
+{% block main_area %}
+    <div id="fh5co-car" class="fh5co-section-gray">
+        <div class="container">
+            <div class="row">
+                <div class="text-center heading-section animate-box">
+                    <h3>패키지 여행 수정하기</h3>
+                </div>
+
+                <div>
+                    <form method="post" enctype="multipart/form-data">
+                    <!--csrf_token 반드시 입력-->
+                    {% csrf_token %}
+
+                    {{ form | crispy }}
+
+                    <!--태그 입력 부분-->
+                    <div class="div_id_tags_str">
+                        <label for="id_tags_str">Tags:</label>
+                        <input type="text" name="tags_str" value="{{ tags_str_default }}" required id="id_tags_str" class="textinput textInput form-control">
+                    </div>
+
+                    <br>
+
+                    <button type="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--마크다운 사용-->
+    {{ form.media }}
+{% endblock %}

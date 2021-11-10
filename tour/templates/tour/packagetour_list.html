@@ -9,6 +9,17 @@
         <div id="fh5co-car" class="fh5co-section-gray">
                 <div class="container">
                     <div class="row">
+
+                        <!--글쓰기 버튼-->
+                        {% if user.is_authenticated %}
+                            {% if user.is_staff or user.is_superuser %}
+                                <a class="btn primary btn-outline btn-lg float-right" href="/tour/create_tour">
+                                    <i class="fas fa-pen"></i>
+                                    여행 등록하기
+                                </a>
+                            {% endif %}
+                        {% endif %}
+
                         <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
                             <h3>패키지 여행 목록</h3>
                             <p>다양한 패키지 여행 정보들을 확인할 수 있습니다.</p>
@@ -18,23 +29,43 @@
 
                 <!--패키지 갯수만큼 반복하기-->
                 {% for tour in packagetour_list %}
+
                 <div class="col-md-6 animate-box">
                     <div class="car">
                         <div class="one-4">
-                            <h3>{{ tour.name }}</h3>
+                            <!--여행 정보-->
+                            <a href="{{ tour.get_absolute_url }}"> <h3>{{ tour.name }}</h3></a>
                             <p>{{ tour.head_text }}</p>
                             <p>{{ tour.start_day | date:"20y-m-d" }}</p>
                             <p>{{ tour.end_day | date:"20y-m-d" }}</p>
 
                             <span class="price">{{ tour.price }}<small>원</small></span>
+                        </div>
+                        <!--이미지-->
+                        <!--헤드 이미지 있을 때만 출력-->
+                        {% if tour.head_image %}
+                            <!--헤드 이미지-->
+<!--                            <img class="one-1 img-responsive" style="height: 400px; overflow: hidden;" src="{{ tour.head_image.url }}" alt="travel">-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;"></div>
+                        {% else %}
+                            <!--기본 이미지-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;"></div>
+                        {% endif %}
 
-                            <a class="btn btn-primary" href="{{ tour.get_absolute_url }}">자세히 →</a>
+                        <!--카테고리-->
+                        {% if category %}
+                            <span class="badge rounded-pill bg-warning text-dark">{{ category }}</span>
+                        {% endif %}
+                        <!--태그-->
+                        {% if tag %}
+                            <i class="fas fa-tags">
+                                <span class="badge bg-light text-dark">{{ tag }} ({{ tag.post_set.count }})</span>
+                            </i>
+                        {% endif %}
                         </div>
-                        <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }});">
-                        </div>
-                    </div>
                 </div>
                 {% endfor %}
+
                 </div>
 			</div>
 		</div>

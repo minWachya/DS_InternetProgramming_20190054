@@ -12,6 +12,8 @@ urlpatterns = [
     path('list', views.PackageTourList.as_view()),
     # 패키지 투어 상세 : 서버ip/tour/pk
     path('list/<int:pk>/', views.PackageTourDetail.as_view()),
+    # 패키지 투어 생성
+    path('create_tour/', views.PackageTourCreate.as_view()),
     # 패키지 투어 수정
     path('update/<int:pk>/', views.PackageTourUpdate.as_view()),
 

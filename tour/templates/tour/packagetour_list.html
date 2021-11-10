@@ -46,22 +46,35 @@
                         {% if tour.head_image %}
                             <!--헤드 이미지-->
 <!--                            <img class="one-1 img-responsive" style="height: 400px; overflow: hidden;" src="{{ tour.head_image.url }}" alt="travel">-->
-                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;"></div>
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;">
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag">
+                                        <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         {% else %}
                             <!--기본 이미지-->
-                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;"></div>
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;">
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         {% endif %}
 
                         <!--카테고리-->
                         {% if category %}
                             <span class="badge rounded-pill bg-warning text-dark">{{ category }}</span>
                         {% endif %}
-                        <!--태그-->
-                        {% if tag %}
-                            <i class="fas fa-tags">
-                                <span class="badge bg-light text-dark">{{ tag }} ({{ tag.post_set.count }})</span>
-                            </i>
-                        {% endif %}
+
                         </div>
                 </div>
                 {% endfor %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import PackageTour, Tag
+from .models import PackageTour, Tag, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -20,10 +20,30 @@ class PackageTourList(ListView):
     model = PackageTour
     ordering = '-pk'
 
+    # 카테고리 데이터 가져오기
+    def get_context_data(self, *, object_list=None, **kwargs):
+        # 상위 context를 사용하겠다.
+        context = super(PackageTourList, self).get_context_data()
+        # 카테고리 값 모두 가져오기
+        context['categories'] = Category.objects.all()
+        # 카테고리 없는 포스트 갯수
+        context['no_category_post_count'] = PackageTour.objects.filter(category=None).count()
+        return context
+
 
 # 패키지 여행 상세 페이지
 class PackageTourDetail(DetailView):
     model = PackageTour
+
+    # 카테고리 데이터 가져오기
+    def get_context_data(self, *, object_list=None, **kwargs):
+        # 상위 context를 사용하겠다.
+        context = super(PackageTourDetail, self).get_context_data()
+        # 카테고리 값 모두 가져오기
+        context['categories'] = Category.objects.all()
+        # 카테고리 없는 포스트 갯수
+        context['no_category_post_count'] = PackageTour.objects.filter(category=None).count()
+        return context
 
 
 # 레시피 수정

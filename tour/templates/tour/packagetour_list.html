@@ -21,16 +21,16 @@
                 <div class="col-md-6 animate-box">
                     <div class="car">
                         <div class="one-4">
-                            <h3>{{ tour.tour_name }}</h3>
+                            <h3>{{ tour.name }}</h3>
                             <p>{{ tour.head_text }}</p>
-                            <p>{{ tour.tour_start_day | date:"20y-m-d" }}</p>
-                            <p>{{ tour.tour_end_day | date:"20y-m-d" }}</p>
+                            <p>{{ tour.start_day | date:"20y-m-d" }}</p>
+                            <p>{{ tour.end_day | date:"20y-m-d" }}</p>
 
-                            <span class="price">{{ tour.tour_price }}<small>원</small></span>
+                            <span class="price">{{ tour.price }}<small>원</small></span>
 
                             <a class="btn btn-primary" href="{{ tour.get_absolute_url }}">자세히 →</a>
                         </div>
-                        <div class="one-1" style="background-image: url({{ tour.head_image.url }});">
+                        <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }});">
                         </div>
                     </div>
                 </div>

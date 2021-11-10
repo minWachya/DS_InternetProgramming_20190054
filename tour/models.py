@@ -2,6 +2,7 @@ from django.db import models
 import os
 from markdownx.utils import markdown
 from markdownx.models import MarkdownxField
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -40,13 +41,13 @@ class Category(models.Model):
 # 패키지 여행
 class PackageTour(models.Model) :
     # 여행 이름
-    tour_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     # 내용 (무한대. 길이제한 없음)
-    tour_content = MarkdownxField()
+    content = MarkdownxField()
     # 사진
-    tour_image = models.ImageField(upload_to='tour/images/%Y/%m/%d')
+    image = models.ImageField(upload_to='tour/images/%Y/%m/%d')
     # 가격
-    tour_price = models.CharField(max_length=10)
+    price = models.CharField(max_length=10)
 
     # 여행사
 
@@ -55,9 +56,9 @@ class PackageTour(models.Model) :
     # 요약(선택)
     head_text = models.CharField(max_length=100, blank=True)
     # 여행 시작일
-    tour_start_day = models.DateTimeField()
+    start_day = models.DateTimeField()
     # 여행 종료일
-    tour_end_day = models.DateTimeField()
+    end_day = models.DateTimeField()
 
     # 카테고리
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, blank=True)
@@ -65,8 +66,12 @@ class PackageTour(models.Model) :
     # 태그
     tags = models.ManyToManyField(Tag, blank=True)
 
+    # 작성자
+    # CASCADE : User 삭제 시 작성한 모든 포스트도 delete + null=True
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
     def __str__(self):
-        return f'[{self.pk}]{self.tour_name}'
+        return f'[{self.pk}]{self.name}'
 
     # 상세 페이지랑 연결
     def get_absolute_url(self):
@@ -74,4 +79,4 @@ class PackageTour(models.Model) :
 
     # content 내용을 마크다운으로 변경해주는 함수
     def get_content_markdown(self):
-        return markdown(self.tour_content)
+        return markdown(self.content)

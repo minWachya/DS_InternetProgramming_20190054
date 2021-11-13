@@ -86,8 +86,29 @@ class PackageTour(models.Model) :
 
     # 상세 페이지랑 연결
     def get_absolute_url(self):
-        return f'/tour/list/{self.pk}'
+        return f'/tour/list/{self.pk}/'
 
     # content 내용을 마크다운으로 변경해주는 함수
     def get_content_markdown(self):
         return markdown(self.content)
+
+
+# 댓글
+class Comment(models.Model):
+    # 패키지 여행 id
+    # 여행 게싀글글 삭제 시 포트의 댓글도 삭제 : CASCADE
+    tour = models.ForeignKey(PackageTour, on_delete=models.CASCADE, null=True)
+    # 댓글 작성자
+    # 시용지 삭제 시 포스트의 댓글도 삭제 : CASCADE
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    # 댓글 내용
+    content = models.TextField()
+    # 작성 시간
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.author}::{self.content}'
+
+    # 패키지 여행 url 리턴
+    def get_absolute_url(self):
+        return f'{self.tour.get_absolute_url()}#comment-{self.pk}'

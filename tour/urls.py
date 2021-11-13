@@ -8,6 +8,8 @@ urlpatterns = [
     # FBV 방법
     # 홈 : 서버ip/
     path('', views.index),
+    # 댓글
+    path('tour/list/<int:pk>/new_comment/', views.new_comment),
 
     # 서버ip/tour/~
     # 패키지 투어 목록 : 서버ip/tour/list

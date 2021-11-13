@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import PackageTour, Tag, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
+from .forms import CommentForm
 
 
 # Create your views here.
@@ -12,6 +13,31 @@ from django.utils.text import slugify
 # # FBV 방법
 def index(request):
     return render(request, 'tour/index.html')
+
+
+# 댓글 자징하기
+def new_comment(request, pk) :
+    # 로그인 되어져있는지
+    if request.user.is_authenticated:
+        # pk 포스트 가져오기
+        tour = get_object_or_404(PackageTour, pk=pk)
+        if request.method == 'POST' :
+            # 댓글 내용 전달받기
+            comment_form = CommentForm(request.POST)
+            # 올바르게 작성했는지
+            if comment_form.is_valid():
+                # 댓글 바로 모델에 등록되는 거 막기
+                comment = comment_form.save(commit=False)
+                # 다른 정보들 넣기
+                comment.tour = tour
+                comment.author = request.user
+                # 댓글 저장하기
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else :
+            return redirect(tour.get_absolute_url())
+    else :
+        raise PermissionDenied
 
 
 # CBV 방법
@@ -43,6 +69,8 @@ class PackageTourDetail(DetailView):
         context['categories'] = Category.objects.all()
         # 카테고리 없는 포스트 갯수
         context['no_category_post_count'] = PackageTour.objects.filter(category=None).count()
+        # 댓글 가져오기
+        context['comment_form'] = CommentForm
         return context
 
 

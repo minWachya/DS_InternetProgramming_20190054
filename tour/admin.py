@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PackageTour, Category, Tag, TourAgency
+from .models import PackageTour, Category, Tag, TourAgency, Comment
 from markdownx.admin import MarkdownxModelAdmin
 
 # Register your models here.
@@ -7,6 +7,8 @@ from markdownx.admin import MarkdownxModelAdmin
 
 # PackageTour 등록 + 마크다운
 admin.site.register(PackageTour, MarkdownxModelAdmin)
+# Comment 등록
+admin.site.register(Comment)
 
 # TourAgency 등록
 admin.site.register(TourAgency)

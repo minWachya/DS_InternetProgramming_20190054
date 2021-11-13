@@ -38,6 +38,21 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
 
 
+# 여행사
+class TourAgency(models.Model) :
+    # 여행사명
+    name = models.CharField(max_length=50)
+    # 주소
+    address = models.CharField(max_length=300)
+    # 연락처
+    contact_number =  models.CharField(max_length=20)
+    # 여행사 로고
+    logo = models.ImageField(upload_to='agency/images/%Y/%m/%d')
+
+    def __str__(self):
+        return f'[{self.pk}]{self.name}'
+
+
 # 패키지 여행
 class PackageTour(models.Model) :
     # 여행 이름
@@ -48,9 +63,8 @@ class PackageTour(models.Model) :
     image = models.ImageField(upload_to='tour/images/%Y/%m/%d')
     # 가격
     price = models.CharField(max_length=10)
-
     # 여행사
-
+    agency = models.ForeignKey(TourAgency, on_delete=models.CASCADE, null=True, blank=True)
     # 썸네일(선택)
     head_image = models.ImageField(upload_to='tour/images/%Y/%m/%d', blank=True)
     # 요약(선택)
@@ -59,13 +73,10 @@ class PackageTour(models.Model) :
     start_day = models.DateTimeField()
     # 여행 종료일
     end_day = models.DateTimeField()
-
     # 카테고리
     category = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL, blank=True)
-
     # 태그
     tags = models.ManyToManyField(Tag, blank=True)
-
     # 작성자
     # CASCADE : User 삭제 시 작성한 모든 포스트도 delete + null=True
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

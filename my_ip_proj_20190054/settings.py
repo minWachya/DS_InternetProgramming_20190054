@@ -44,6 +44,14 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'markdownx',
+
+    # 장고 all auth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 구글 로그인 서비스
+    'allauth.socialaccount.providers.google'
 ]
 
 
@@ -106,6 +114,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# 로그인 인증 설정
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+SITE_ID = 1
+# 로그인 시 이메일 반드시 설정
+ACCOUNT_EMAIL_REQUIRED = True
+# 이메일 유효성 체크 X
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# 로그인 후 이동할 URL
+LOGIN_REDIRECT_URL = '/'
 
 
 # Internationalization

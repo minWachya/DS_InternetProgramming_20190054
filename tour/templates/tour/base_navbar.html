@@ -1,3 +1,6 @@
+<!--구글 로그인 이용-->
+{% load socialaccount %}
+
 <!--네비바-->
 <header id="fh5co-header-section" class="sticky-banner">
     <div class="container">
@@ -5,7 +8,7 @@
 
             <!--로고-->
             <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
-            <h1 id="fh5co-logo"><a href="index.html"><i class="icon-airplane"></i>민영</a></h1>
+            <h1 id="fh5co-logo"><a href="/"><i class="icon-airplane"></i>민영</a></h1>
             <!-- START #fh5co-menu-wrap -->
 
             <nav id="fh5co-menu-wrap" role="navigation">
@@ -28,10 +31,63 @@
                     <li><a href="/my_page">My Page</a></li>
 
                     <!--로그인-->
-                    <li><a href="contact.html" class="btn btn-primary btn-outline btn-lg">Login</a></li>
+                    <!--로그인 되어있으면 로그아웃-->
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="fh5co-sub-ddown">{{ user.username }}님! 환영합니다</a>
+                            <ul class="fh5co-sub-menu">
+                                <li><a href="/accounts/logout/">Log Out</a></li>
+                            </ul>
+                        </li>
+                     <!--로그인 안 돠어져 있으면 로그인-->
+                    {% else %}
+                        <li class="nav-item">
+                            <!-- Button trigger modal -->
+                            <a role="button" class="btn btn-primary btn-outline btn-lg" data-toggle="modal" data-target="#loginModal">
+                                Log In
+                            </a>
+                        </li>
+                    {% endif %}
                 </ul>
             </nav>
-
         </div>
     </div>
 </header>
+
+            <!-- Modal -->
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Log In</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!--구글 로그인-->
+                                    <a href="{% provider_login_url 'google' %}" role="button" class="btn btn-outline-dark btn-block btn-sm">
+                                        <i class="fab fa-google"></i>&nbsp&nbsp Log In with Google
+                                    </a>
+                                    <!--이메일 로그인-->
+                                    <a href="/accounts/login/" type="button" class="btn btn-outline-dark btn-block btn-sm">
+                                        <i class="far fa-envelope"></i>&nbsp&nbsp Log In with E-mail
+                                    </a>
+                                </div>
+
+                                <!--이메일 회원가입입-->
+                               <div class="col-md-6">
+                                    <a href="/accounts/signup/" role="button" class="btn btn-outline-dark btn-block btn-sm">
+                                        <i class="far fa-envelope"></i>&nbsp&nbsp Sing Up with E-mail
+                                    </a>
+                               </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

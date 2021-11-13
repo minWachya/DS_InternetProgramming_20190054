@@ -30,6 +30,8 @@ urlpatterns = [
 
     # 마크다운
     path('markdownx/', include('markdownx.urls')),
+    # account
+    path('accounts/', include('allauth.urls'))
 ]
 # ip 주소 외 이미지 접근하려는 선언 추가
 # 서버IP/media

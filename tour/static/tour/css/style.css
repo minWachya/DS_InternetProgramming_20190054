@@ -1,5 +1,28 @@
 {% load static %}
 
+.custom-shape-divider-bottom-1636861065 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1636861065 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 98px;
+}
+
+.custom-shape-divider-bottom-1636861065 .shape-fill {
+    fill: #FFFFFF;
+}
+
+
+
 @font-face {
   font-family: 'icomoon';
   src: url("{% static 'tour/fonts/icomoon/icomoon.eot?srf3rx' %}");

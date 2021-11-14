@@ -4,6 +4,76 @@
 
 {% block main_area %}
 
+<div class="fh5co-hero">
+	<div class="fh5co-overlay"></div>
+	<div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_3.jpg);">
+		<div class="desc">
+			<div class="container">
+				<div class="row">
+					<!--이미지-->
+					<div class="col-sm-7 col-md-7 animate-box" style="overflow: hidden; margin-top:-150px;" >
+						<!--헤드 이미지 있을 때만 출력-->
+                        {% if tour.head_image %}
+                            <!--헤드 이미지-->
+							<img class="img-responsive" style="overflow: hidden;" src="{{ packagetour.head_image.url }}" alt="travel">
+                        {% else %}
+                            <!--기본 이미지-->
+							<img class="img-responsive" style="overflow: hidden;" src="{{ packagetour.image.url }}" alt="travel">
+                        {% endif %}
+					</div>
+
+					<div class="col-sm-5 col-md-5">
+						<div class="tabulation animate-box">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">여행 정보</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="flights">
+									<div class="row">
+										<!--여행 제목-->
+										<div class="col-12 mt">
+											<h3 style="color:black;">{{ packagetour.name }}</h3>
+										</div>
+										<!--여행 요약-->
+										<div class="col-12 mt">
+											<p style="color:black;">
+												{{ packagetour.head_text }}
+											</p>
+										</div>
+										<!--여행 일자-->
+										<div class="col-12 mt">
+											<label>여행 일자 : </label>
+											<p style="color:black;">
+												{{ packagetour.start_day | date:"20y년 m월 d일 h시 m분" }} 부터<br>
+												{{ packagetour.end_day | date:"20y년 m월 d일 h시 m분"  }} 까지
+											</p>
+										</div>
+										<!--가격-->
+										<div class="col-12 mt">
+											<label>가격 : </label>
+											<span style="color:black;">{{ packagetour.price }}<small>원</small></span>
+										</div>
+										<!--구매 버튼-->
+										<div class="col-xs-12">
+											<input type="submit" class="btn btn-primary btn-block" value="구매하기">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
     <div id="fh5co-tours" class="fh5co-section-gray">
 			<div class="container">
 				<div class="row">
@@ -65,7 +135,8 @@
 							<a href="#" role="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#loginModal">로그인하기</a>
 						</h2>
 					{% endif %}
-					<hr/>
+					<br/>
+					<br/>
 				</div>
 
 				<div class="row">

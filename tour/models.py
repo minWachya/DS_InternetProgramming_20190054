@@ -30,8 +30,8 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return f'/tour/category/{self.slug}'
+    def get_absolute_url(self):
+        return f'/tour/category/{self.slug}'
 
     # admin에 뜨느 클래스 이름
     class Meta:

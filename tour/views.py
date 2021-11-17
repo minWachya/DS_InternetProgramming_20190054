@@ -11,8 +11,34 @@ from .forms import CommentForm
 
 
 # # FBV 방법
+# 홈
 def index(request):
     return render(request, 'tour/index.html')
+
+
+# 회사 소개
+def about_us(request):
+    return render(request, 'tour/about_us.html')
+
+
+# 카테고리 페이지
+def category_page(request, slug):
+    if slug == 'no_category':
+        category = '미분류'
+        tour_liat = PackageTour.objects.filter(category=None)
+    else :
+        category = Category.objects.get(slug=slug)
+        # 카테고리 있는 모든 포스트 불러오기(다대일 관계)
+        tour_liat = PackageTour.objects.filter(category=category)
+
+    return render(request, 'tour/packagetour_list.html',
+                  {
+                      'packagetour_list' : tour_liat,
+                      'categories' : Category.objects.all(),
+                      'no_category_post_count' : PackageTour.objects.filter(category=None).count(),
+                      'category' : category,
+                  }
+                  )
 
 
 # 댓글 자징하기
@@ -74,7 +100,7 @@ class PackageTourDetail(DetailView):
         return context
 
 
-# 레시피 수정
+# 패키지 여행 수정
 class PackageTourUpdate(LoginRequiredMixin, UpdateView):
     model = PackageTour
     fields = ['name', 'content', 'image', 'price', 'head_image', 'head_text', 'start_day', 'end_day', 'category']

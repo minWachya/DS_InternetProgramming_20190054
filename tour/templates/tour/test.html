@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 {% load static %}
-<html class="no-js">
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Travel &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
-		<link rel="stylesheet" href="{% static 'tour/css/ticket.css' %}">
-	</head>
 
-	<body>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="" media="screen">
+    </head>
 
-        <div class="cardWrap">
-            <div class="card cardLeft">
-                <h1>[하나투어]<span>부산 여행 패키지</span></h1>
-                <div class="title">
-                    <span>여행 소개</span>
-                    <h2>종강하고 나서 오세요%^^</h2>
+    <body>  <!-- 꾸밈 -->
+        <div id="con">
+        <div id="login">
+        <div id="login_form"><!--로그인 폼-->
+
+            <form method="post" class="post-form">
+                {% csrf_token %}
+                <h3 class="login" style="letter-spacing:-1px;">SIGN UP</h3>
+                <hr>
+                <div class="form-group">
+                    <p style="text-align: left; font-size:15px; color:#666">
+                        <label for="username">USERNAME</label>
+                    </p>
+                    <input type="text" class="form-control size" name="username" id="username"
+                           value="{{ form.username.value|default_if_none:'' }}" placeholder="아이디">
                 </div>
 
-                <div class="name">
-                    <span>가격</span>
-                    <h2>50,000</h2>
+                <div class="form-group">
+                    <p style="text-align: left; font-size:15px; color:#666">
+                        <label for="password1">PASSWORD</label>
+                    </p>
+                    <input type="password" class="form-control size" name="password1" id="password1"
+                           value="{{ form.password1.value|default_if_none:'' }}" placeholder="영문,숫자 포함 8자 이상 비밀번호">
                 </div>
 
-                <div class="seat">
-                    <span>여행 시작일</span>
-                    <h2>2021-10-10</h2>
+                <div class="form-group">
+                    <p style="text-align: left; font-size:15px; color:#666">
+                        <label for="password2">PASSWORD AGAIN</label>
+                    </p>
+                    <input type="password" class="form-control size" name="password2" id="password2"
+                           value="{{ form.password2.value|default_if_none:'' }}" placeholder="비밀번호 확인">
                 </div>
 
-                <div class="time">
-                    <span>여행 종료일</span>
-                    <h2>2021-10-10</h2>
+                <div class="form-group">
+                    <p style="text-align: left; font-size:15px; color:#666">
+                        <label for="email">E-MAIL</label>
+                    </p>
+                    <input type="text" class="form-control size" name="email" id="email"
+                           value="{{ form.email.value|default_if_none:'' }}" placeholder="이메일">
                 </div>
-            </div>
-
-            <div class="card cardRight">
-                <div class="eye"></div>
-                <div class="number">
-                    <h3>156</h3>
-                    <span>seat</span>
-                </div>
-                <div class="barcode"></div>
-            </div>
-
+                <br/>
+                <button type="submit" class="btn btn-outline-primary">SIGN UP</button>
+            </form>
+            <hr>
+            <p class="find"><span>회원이신가요?  <a href="">Go to LOG-IN!</a></span></p>
         </div>
-        <!--티켓 끝-->
-
-
-	</body>
+        </div>
+        </div>
+    </body>
 </html>

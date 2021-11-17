@@ -9,8 +9,8 @@
             <!--로고-->
             <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
             <h1 id="fh5co-logo"><a href="/"><i class="icon-airplane"></i>민영</a></h1>
-            <!-- START #fh5co-menu-wrap -->
 
+            <!-- START #fh5co-menu-wrap -->
             <nav id="fh5co-menu-wrap" role="navigation">
                 <ul class="sf-menu" id="fh5co-primary-menu">
                     <!--홈-->
@@ -27,8 +27,9 @@
                     </li>
                     <!--상품 목록-->
                     <li><a href="/tour/list">Package List</a></li>
-                    <!--My 페이지-->
-                    <li><a href="/my_page">My Page</a></li>
+
+                    <!--회사 정보-->
+                    <li><a href="/tour/about_us">About Us</a></li>
 
                     <!--로그인-->
                     <!--로그인 되어있으면 로그아웃-->
@@ -37,6 +38,8 @@
                             <a href="#" class="fh5co-sub-ddown">{{ user.username }}님! 환영합니다</a>
                             <ul class="fh5co-sub-menu">
                                 <li><a href="/accounts/logout/">Log Out</a></li>
+                                <!--My 페이지-->
+                                <li><a href="/tour/my_page">My Page</a></li>
                             </ul>
                         </li>
                      <!--로그인 안 돠어져 있으면 로그인-->
@@ -69,18 +72,18 @@
                                 <div class="col-md-6">
                                     <!--구글 로그인-->
                                     <a href="{% provider_login_url 'google' %}" role="button" class="btn btn-primary btn-outline btn-block btn-sm">
-                                        <i class="fab fa-google"></i>&nbsp&nbsp Log In with Google
+                                        <i class="fab fa-google"></i>&nbsp;&nbsp; Log In with Google
                                     </a>
                                     <!--이메일 로그인-->
                                     <a href="/accounts/login/" type="button" class="btn btn-outline btn-block btn-sm">
-                                        <i class="far fa-envelope"></i>&nbsp&nbsp Log In with E-mail
+                                        <i class="far fa-envelope"></i>&nbsp;&nbsp; Log In with E-mail
                                     </a>
                                 </div>
 
                                 <!--이메일 회원가입입-->
                                <div class="col-md-6">
                                     <a href="/accounts/signup/" role="button" class="btn btn-outline btn-block btn-sm">
-                                        <i class="far fa-envelope"></i>&nbsp&nbsp Sing Up with E-mail
+                                        <i class="far fa-envelope"></i>&nbsp;&nbsp; Sing Up with E-mail
                                     </a>
                                </div>
                             </div>

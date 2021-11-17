@@ -38,7 +38,6 @@
                             <p style="color:white;">{{ tour.head_text }}</p>
                             <p style="color:white;">{{ tour.start_day | date:"20y-m-d" }}</p>
                             <p style="color:white;">{{ tour.end_day | date:"20y-m-d" }}</p>
-
                             <span class="price">{{ tour.price }}<small>원</small></span>
 
                             <!--태그-->
@@ -55,15 +54,20 @@
                         {% if tour.head_image %}
                             <!--헤드 이미지-->
 <!--                            <img class="one-1 img-responsive" style="height: 400px; overflow: hidden;" src="{{ tour.head_image.url }}" alt="travel">-->
-                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;"></div>
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}
+                                    <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+                            </div>
                         {% else %}
                             <!--기본 이미지-->
-                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;"></div>
-                        {% endif %}
-
-                        <!--카테고리-->
-                        {% if category %}
-                            <span class="badge rounded-pill bg-warning text-dark">{{ category }}</span>
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}
+                                    <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+                            </div>
                         {% endif %}
 
                         </div>

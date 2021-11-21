@@ -13,7 +13,12 @@ from .forms import CommentForm
 # # FBV 방법
 # 홈
 def index(request):
-    return render(request, 'tour/index.html')
+    recent_tour = PackageTour.objects.order_by('-pk')[:3]
+    return render(request, 'tour/index.html',
+                  {
+                      'recent_tour':recent_tour,
+                  }
+                  )
 
 
 # 회사 소개

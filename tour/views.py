@@ -17,6 +17,7 @@ def index(request):
     return render(request, 'tour/index.html',
                   {
                       'recent_tour':recent_tour,
+                      'categories': Category.objects.all(),
                   }
                   )
 

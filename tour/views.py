@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import PackageTour, Tag, Category
+from .models import PackageTour, Tag, Category, TourAgency
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -18,6 +18,7 @@ def index(request):
                   {
                       'recent_tour':recent_tour,
                       'categories': Category.objects.all(),
+                      'tour_agencies':TourAgency.objects.all(),
                   }
                   )
 

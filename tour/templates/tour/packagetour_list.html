@@ -25,7 +25,6 @@
                             <p>다양한 패키지 여행 정보들을 확인할 수 있습니다.</p>
                         </div>
                     </div>
-                    <div class="row row-bottom-padded-md">
 
                 <!--패키지 갯수만큼 반복하기-->
                 {% for tour in packagetour_list %}
@@ -74,7 +73,28 @@
                 </div>
                 {% endfor %}
 
+                <!--페이지네이션-->
+                <!--다 보여줄 페이지가 있으면 페이지네이션 보이기-->
+                {% if is_paginated %}
+                <div class="col-md-12 text-center animate-box">
+                    <!--보여줄 이전 페이지가 있으면 페이지네이션 보이기-->
+                    {% if page_obj.has_previous %}
+                    <a class="btn btn-primary btn-outline btn-lg" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-left"></i>이전 페이지</a>
+                    <!--없으면 비활성화-->
+                    {% else %}
+                    <a class="btn btn-primary btn-outline btn-lg disabled" href="#"><i class="fas fa-arrow-left"></i>이전 페이지</a>
+                    {% endif %}
+
+                    <!--보여줄 다음 페이지가 있으면 페이지네이션 보이기-->
+                    {% if page_obj.has_next %}
+                    <a class="btn btn-primary btn-outline btn-lg" href="?page={{ page_obj.next_page_number }}">다음 페이지<i class="fas fa-arrow-right"></i></a>
+                    <!--없으면 비활성화-->
+                    {% else %}
+                    <a class="btn btn-primary btn-outline btn-lg disabled" href="#">다음 페이지<i class="fas fa-arrow-right"></i></a>
+                    {% endif %}
+                {% endif %}
                 </div>
+
 			</div>
 		</div>
     {% else %}

@@ -71,6 +71,8 @@ def new_comment(request, pk) :
 class PackageTourList(ListView):
     model = PackageTour
     ordering = '-pk'
+    # 페이지네이션 갯수
+    paginate_by = 6
 
     # 카테고리 데이터 가져오기
     def get_context_data(self, *, object_list=None, **kwargs):

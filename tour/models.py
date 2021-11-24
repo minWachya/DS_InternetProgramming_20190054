@@ -112,3 +112,10 @@ class Comment(models.Model):
     # 패키지 여행 url 리턴
     def get_absolute_url(self):
         return f'{self.tour.get_absolute_url()}#comment-{self.pk}'
+
+    # 아바타 설정
+    def get_avatar_url(self):
+        if self.author.socialaccount_set.exists():
+            return self.author.socialaccount_set.first().get_avatar_url()
+        else:
+            return f'https://source.boringavatars.com/beam/120/{self.author.email}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51'

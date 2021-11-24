@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 from .forms import CommentForm
+from django.db.models import Q
 
 
 # Create your views here.
@@ -89,6 +90,30 @@ class PackageTourList(ListView):
         context['categories'] = Category.objects.all()
         # 카테고리 없는 포스트 갯수
         context['no_category_post_count'] = PackageTour.objects.filter(category=None).count()
+        return context
+
+
+# 여행 장소 검색
+class PackageTourSearchPlace(PackageTourList):
+    # 페이지네이션 갯수
+    paginate_by = 5
+
+    # 검색 결과 반환
+    def get_queryset(self):
+        q = self.kwargs['q']
+        # name과 category에 q 키워드를 가지고 있는지
+        packagetour_list = PackageTour.objects.filter(
+            Q(name__contains=q) | Q(category__name__contains=q)
+        ).distinct() # 중복 없이
+        return packagetour_list
+
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(PackageTourSearchPlace, self).get_context_data()
+        q = self.kwargs['q']
+        context['search_info'] = '여행지 장소 검색'
+        context['search_info_keyword'] = f'{q}'
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
         return context
 
 

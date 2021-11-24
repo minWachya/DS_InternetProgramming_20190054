@@ -9,7 +9,7 @@
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#place" aria-controls="place" role="tab" data-toggle="tab">야헹 장소 검색</a>
+                                    <a href="#place" aria-controls="place" role="tab" data-toggle="tab">여헹 장소 검색</a>
                                 </li>
                                 <li role="presentation">
                                     <a href="#date" aria-controls="date" role="tab" data-toggle="tab">여행 날짜 검색</a>
@@ -23,67 +23,15 @@
                                 <!--여행 장소 검색-->
                                 <div role="tabpanel" class="tab-pane active" id="place">
                                     <div class="row">
-                                        <div class="col-xxs-12 col-xs-6 mt">
+                                        <div class="col-xxs-12 col-xs-12 mt">
                                             <div class="input-field">
-                                                <label>From:</label>
-                                                <input type="text" class="form-control" placeholder="Los Angeles, USA"/>
+                                                <h3 style="color:black;">관심있는 여행지를 검색하세요.</h3>
+                                                <label>여행 장소:</label>
+                                                <input id="search-input-place" type="text" class="form-control" placeholder="지금 '제주'를 검색하세요!"/>
                                             </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <div class="input-field">
-                                                <label>To:</label>
-                                                <input type="text" class="form-control" placeholder="Tokyo, Japan"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt alternate">
-                                            <div class="input-field">
-                                                <label for="date-start">Check In:</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt alternate">
-                                            <div class="input-field">
-                                                <label for="date-end">Check Out:</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mt">
-                                            <section>
-                                                <label>Class:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>Economy</option>
-                                                    <option value="economy">Economy</option>
-                                                    <option value="first">First</option>
-                                                    <option value="business">Business</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Adult:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Children:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
                                         </div>
                                         <div class="col-xs-12">
-                                            <input type="submit" class="btn btn-primary btn-block" value="Search Flight">
+                                            <input type="submit" class="btn btn-primary btn-block" value="여행 장소 검색" onclick="searchPlace()">
                                         </div>
                                     </div>
                                 </div>
@@ -223,9 +171,16 @@
                     <div class="desc2 animate-box">
                         <div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
                             <p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
+                            <!--검색 결과 있을 때-->
+                            {% if search_info %}
+                            <h2>{{ search_info }}</h2>
+                            <h3>{{ search_info_count }}</h3>
+                            <span class="price">{{ search_info_keyword }}</span>
+                            {% else %}
                             <h2>여행 #떠나보자고</h2>
                             <h3>20190054 이민영</h3>
                             <span class="price">$20190054</span>
+                            {% endif %}
                         </div>
                     </div>
 

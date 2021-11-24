@@ -1,4 +1,8 @@
-{% extends 'tour/base_no_header.html' %}
+{% extends 'tour/base/base_no_header.html' %}
+
+{% block nav_area %}
+    {% include 'tour/base/navbar/base_navbar_about_us.html' %}
+{% endblock %}
 
 {% block main_area %}
 

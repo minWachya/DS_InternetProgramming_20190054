@@ -1,4 +1,7 @@
-{% extends 'tour/base.html' %}
+{% extends 'tour/base/base.html' %}
+{% block nav_area %}
+    {% include 'tour/base/navbar/base_navbar_list.html' %}
+{% endblock %}
 
 <div class="container">
 {% block main_area %}

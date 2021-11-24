@@ -1,25 +1,25 @@
-{% extends 'tour/base.html' %}
+{% extends 'tour/base/base.html' %}
 
 {% block main_area %}
 
 		<!--최근 패키지 투어 3개-->
-		{% include 'tour/base_Hot_Tours.html' %}
+		{% include 'tour/base/base_Hot_Tours.html' %}
 		<!--최근 패키지 투어 3개 끝-->
 
 		<!--여행사-->
-		{% include 'tour/base_tour_agencies.html' %}
+		{% include 'tour/base/base_tour_agencies.html' %}
 		<!--여행사 끝-->
 
 		<!--카테고리-->
-		{% include 'tour/base_tour_category.html' %}
+		{% include 'tour/base/base_tour_category.html' %}
 		<!--카테고리 끝-->
 
 		<!--Blog-->
-		{% include 'tour/base_blog.html' %}
+		{% include 'tour/base/base_blog.html' %}
 		<!--Blog 끝-->
 
 		<!--Comment-->
-		{% include 'tour/base_comment.html' %}
+		{% include 'tour/base/base_comment.html' %}
 		<!--Comment 끝-->
 
 {% endblock %}

@@ -73,8 +73,15 @@
 		<div id="fh5co-page">
 
 		<!--네비바-->
-		{% include 'tour/base_navbar.html' %}
+		<!--블록 : nav_area-->
+		{% block nav_area %}
+			{% include 'tour/base/navbar/base_navbar.html' %}
+		{% endblock %}
 		<!--네비바 끝-->
+
+		<!--헤더-->
+		{% include 'tour/base/base_header_with_search.html' %}
+		<!--헤더 끝-->
 
 		<!--블록 : main_area-->
 		{% block main_area %}
@@ -82,7 +89,7 @@
 		<!--블록 끝 : main_area-->
 
 		<!--푸터-->
-		{% include 'tour/base_footer.html' %}
+		{% include 'tour/base/base_footer.html' %}
 		<!--푸터 끝-->
 
 		</div><!-- END fh5co-page -->
@@ -112,6 +119,25 @@
 	<script src="{% static 'tour/js/selectFx.js' %}"></script>
 	<!-- Main JS -->
 	<script src="{% static 'tour/js/main.js' %}"></script>
+
+	<!--검색 함수-->
+    <script>
+    	// 여행 장소 검색
+        function searchPlace() {
+            // 검색어 가져오기
+            let searchValue = document.getElementById('search-input-place').value.trim();
+            // 2자 이상만 검색되로록
+            if (searchValue.length > 1)
+                location.href = "/tour/search/" + searchValue + "/";
+            else alert('검색어(' + searchValue + ')가 너무 짧습니다.');
+        };
+        // 엔터 쳐도 검색 되게
+        document.getElementById('search-input-place').addEventListener('keyup',
+            function(event) {
+                if (event.key == 'Enter') { searchPlace(); }
+            }
+            )
+    </script>
 	</body>
 </html>
 

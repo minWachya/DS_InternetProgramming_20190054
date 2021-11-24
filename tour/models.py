@@ -26,6 +26,7 @@ class Category(models.Model):
     # pk(숫자) 대신 name 자체(text)로 url 만들고 싶다. (한굴 포함 : allow_unicode=True)
     name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+    image = models.ImageField(upload_to='category/images/%Y/%m/%d', blank=True)
 
     def __str__(self):
         return self.name

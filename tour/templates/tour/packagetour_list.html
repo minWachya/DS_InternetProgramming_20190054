@@ -31,12 +31,11 @@
 
                 <!--패키지 갯수만큼 반복하기-->
                 {% for tour in packagetour_list %}
-
                 <div class="col-md-6 animate-box">
                     <div class="car">
                         <div class="one-4">
                             <!--여행 정보-->
-                            <a href="{{ tour.get_absolute_url }}"> <h3>{{ tour.name }}</h3></a>
+                            <a href="{{ tour.get_absolute_url }}"><h3>{{ tour.name }}</h3></a>
                             <p style="color:white;">{{ tour.head_text }}</p>
                             <p style="color:white;">{{ tour.start_day | date:"20y-m-d" }}</p>
                             <p style="color:white;">{{ tour.end_day | date:"20y-m-d" }}</p>
@@ -72,7 +71,7 @@
                             </div>
                         {% endif %}
 
-                        </div>
+                    </div>
                 </div>
                 {% endfor %}
 

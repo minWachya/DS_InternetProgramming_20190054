@@ -10,6 +10,7 @@ urlpatterns = [
     path('', views.index),
     # 댓글
     path('tour/list/<int:pk>/new_comment/', views.new_comment),
+    path('tour/list/<int:pk>/create_comment/', views.create_comment),
     # 카테고리 페이지
     path('tour/category/<str:slug>', views.category_page),
 

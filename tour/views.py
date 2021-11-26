@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import PackageTour, Tag, Category, TourAgency
+from django.utils import timezone
+
+from .models import PackageTour, Tag, Category, TourAgency, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
@@ -67,7 +69,22 @@ def new_comment(request, pk) :
             return redirect(tour.get_absolute_url())
     else :
         raise PermissionDenied
+def create_comment(request, pk):
+    # 로그인 되어져있는지
+    if request.user.is_authenticated:
+        # pk 포스트 가져오기
+        tour = get_object_or_404(PackageTour, pk=pk)
+        if request.method == "POST":
+            # 댓글 내용 전달받기
+            comment = Comment()
+            comment.tour = tour
+            comment.author = request.user
+            comment.content = request.POST['comment_context']
+            comment.created_at = timezone.now()
+            comment.save()
+            return redirect(comment.get_absolute_url())
 
+    return redirect(tour.get_absolute_url())
 
 # CBV 방법
 # 패키지 여행 목록 페이지

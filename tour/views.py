@@ -24,11 +24,6 @@ def index(request):
                   )
 
 
-# 회사 소개
-def about_us(request):
-    return render(request, 'tour/about_us.html')
-
-
 # 카테고리 페이지
 def category_page(request, slug):
     if slug == 'no_category':

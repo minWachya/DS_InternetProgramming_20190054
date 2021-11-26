@@ -10,8 +10,6 @@ urlpatterns = [
     path('', views.index),
     # 댓글
     path('tour/list/<int:pk>/new_comment/', views.new_comment),
-    # 회사 소개 : 서버ip/tour/about_us
-    path('tour/about_us', views.about_us),
     # 카테고리 페이지
     path('tour/category/<str:slug>', views.category_page),
 

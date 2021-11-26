@@ -1,5 +1,8 @@
 {% extends 'tour/base/base_no_header.html' %}
 
+<!--구글 로그인 이용-->
+{% load socialaccount %}
+
 {% block nav_area %}
     {% include 'tour/base/navbar/base_navbar_user.html' %}
 {% endblock %}
@@ -18,12 +21,17 @@
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active">
-									<a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">로그인</a>
+									<a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">이메일 로그인</a>
+								</li>
+
+								<li role="presentation">
+									<a href="#signup_with" aria-controls="signup_with" role="tab" data-toggle="tab">간편 로그인</a>
 								</li>
 							</ul>
 
 							<!-- Tab panes -->
 							<div class="tab-content">
+								<!--이메일 로그인-->
 								<div role="tabpanel" class="tab-pane active" id="signup">
 									<div class="row">
                                         <form method="POST"> {% csrf_token %}
@@ -49,6 +57,19 @@
 
 									</div>
 								</div>
+
+								<!--간편 로그인-->
+								<div role="tabpanel" class="tab-pane active" id="signup_with">
+									<div class="row">
+                                        <div class="col-xxs-12 col-xs-12 mt">
+											<!--구글 로그인-->
+											<a href="{% provider_login_url 'google' %}" role="button" class="btn btn-primary btn-outline btn-block btn-sm">
+												<i class="fab fa-google"></i>&nbsp;&nbsp; Log In with Google
+											</a>
+                                        </div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>

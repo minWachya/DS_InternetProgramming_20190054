@@ -17,11 +17,17 @@ from django.db.models import Q
 # 홈
 def index(request):
     recent_tour = PackageTour.objects.order_by('-pk')[:3]
+    tour0 = Comment.objects.filter(tour=recent_tour[0]).count()
+    tour1 = Comment.objects.filter(tour=recent_tour[1]).count()
+    tour2 = Comment.objects.filter(tour=recent_tour[2]).count()
     return render(request, 'tour/index.html',
                   {
                       'recent_tour':recent_tour,
                       'categories': Category.objects.all(),
                       'tour_agencies':TourAgency.objects.all(),
+                      'tour0_comment_count':tour0,
+                      'tour1_comment_count': tour1,
+                      'tour2_comment_count': tour2,
                   }
                   )
 

@@ -1,11 +1,17 @@
+import os
+
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 # Create your views here.
 
 
 # 회원가입
+from django.views import View
+
+
 def signup(request):
     if request.method == 'POST':
         # 비밀번호가 모두 일치하면
@@ -41,3 +47,17 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+class KakaoSignInCallBackView(View):
+    def get(self, request):
+        auth_code = request.GET.get('code')
+        kakao_token_api = 'https://kauth.kakao.com/oauth/token'
+        data = {
+            'grant_type':'authorizations_code',
+            'client_id':"8a338d4b56af8cd51ead20df18bfb274",
+            'redirection_uri':'http://127.0.0.1:8000/accounts/kakao/login/callback',
+            'code':auth_code,
+        }
+        token_response = request.post(kakao_token_api, data=data)
+        return JsonResponse({"token":token_response.json()})

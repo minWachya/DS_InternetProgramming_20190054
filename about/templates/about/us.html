@@ -7,5 +7,128 @@
 {% endblock %}
 
 {% block main_area %}
-<h3>avout us</h3>
+<div class="fh5co-hero">
+	<div class="fh5co-overlay"></div>
+	<!--이미지-->
+	<!--헤드 이미지 있을 때만 출력-->
+	{% if tour.head_image %}
+	<!--헤드 이미지-->
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url({{ packagetour.head_image.url }});">
+	{% else %}<!--기본 이미지-->
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url({{ packagetour.image.url }});">
+	{% endif %}
+
+		<div class="desc">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-5 col-md-5">
+						<div class="tabulation animate-box">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">여행 정보</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="flights">
+									<div class="row">
+										<!--여행 제목-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<h3 style="color:black;">{{ packagetour.name }}</h3>
+										</div>
+										<!--여행 요약-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<p style="color:black;">
+												{{ packagetour.head_text }}
+											</p>
+										</div>
+										<!--여행 일자-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<label>여행 일자 : </label>
+											<p style="color:black;">
+												{{ packagetour.start_day | date:"20y/m/d h:m" }} ~
+												{{ packagetour.end_day | date:"20/m//d h:m"  }}
+											</p>
+										</div>
+
+										<!--여행사-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>여행사 : </label>
+											<div class="feature-left">
+												<p style="color:black;">{{ packagetour.agency.name }}</p>
+											</div>
+										</div>
+
+										<!--가격-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>가격 : </label>
+											<div class="feature-left">
+												<span style="color:black;">{{ packagetour.price }}<small>원</small></span>
+											</div>
+										</div>
+
+										<!--구매 버튼-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<input type="submit" class="btn btn-primary btn-block" value="구매하기">
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--헤더 오른쪽-->
+					<div class="desc2 animate-box">
+						<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+							<p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
+							<h2>Binary는 호남선~<i class="fas fa-music"></i></h2>
+							<h3>num row column char에~</h3>
+							<h3>안녕하세요! 국내 여행 소개, binary는 호남선입니다~^^</h3>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+    <div id="fh5co-tours" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>Binary는 호남선을 소개합니다!</h3>
+						<p>20190054 이민영</p>
+					</div>
+				</div>
+				<div class="row row-bottom-padded-md">
+					<div class="col-md-12 animate-box">
+						<h2 class="heading-title">
+							여행 상세 정보
+
+							<!--수정 버튼-->
+							{% if user.is_authenticated and user == packagetour.author %}
+								<button type="button" class="btn btn-primary btn-outline btn-lg" onclick="location.href='/tour/update/{{ packagetour.pk }}/'">수정</button>
+							{% endif %}
+						</h2>
+					</div>
+					<!--패키지 여행 설명-->
+					<div class="col-md-6 animate-box">
+						<div class="row">
+							{{ packagetour.get_content_markdown | safe }}
+						</div>
+					</div>
+					<!--패키지 여행 이미지-->
+					<div class="col-md-6 animate-box">
+						<img class="img-responsive" src="{{ packagetour.image.url }}" alt="travel">
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
 {% endblock %}

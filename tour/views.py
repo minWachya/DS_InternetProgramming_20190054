@@ -40,13 +40,12 @@ def category_page(request, slug):
     else :
         category = Category.objects.get(slug=slug)
         # 카테고리 있는 모든 포스트 불러오기(다대일 관계)
-        tour_liat = PackageTour.objects.filter(category=category)
+        tour_list = PackageTour.objects.filter(category=category)
 
     return render(request, 'tour/packagetour_list.html',
                   {
-                      'packagetour_list' : tour_liat,
+                      'packagetour_list' : tour_list,
                       'categories' : Category.objects.all(),
-                      'no_category_post_count' : PackageTour.objects.filter(category=None).count(),
                       'category' : category,
                   }
                   )

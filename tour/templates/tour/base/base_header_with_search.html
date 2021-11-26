@@ -173,13 +173,19 @@
                             <p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
                             <!--검색 결과 있을 때-->
                             {% if search_info %}
-                            <h2>{{ search_info }}</h2>
-                            <h3>{{ search_info_count }}</h3>
-                            <span class="price">{{ search_info_keyword }}</span>
+                                <h2>{{ search_info }}</h2>
+                                <h3>{{ search_info_count }}</h3>
+                                <span class="price">{{ search_info_keyword }}</span>
+                            {% endif %}
+                            <!--카테고리일 때-->
+                            {% if category %}
+                                <h2>{{ category }}</h2>
+                                <h3>{{ packagetour_list.count }}개의 패키지 여행이 있습니다.</h3>
+                                <span class="price">$20190054</span>
                             {% else %}
-                            <h2>여행 #떠나보자고</h2>
-                            <h3>20190054 이민영</h3>
-                            <span class="price">$20190054</span>
+                                <h2>여행 #떠나보자고</h2>
+                                <h3>20190054 이민영</h3>
+                                <span class="price">$20190054</span>
                             {% endif %}
                         </div>
                     </div>

@@ -140,23 +140,11 @@
 				<div class="row">
 					<!--댓글 작성 부분 로그인 한 유저에게만 보이기-->
 					{% if user.is_authenticated %}
-						<!--댓글 작성 시 상세 페이지로 다시 이동-->
-						<form class="mb-4" id="comment_form" method="POST" action="{{ packagetour.get_absolute_url }}new_comment/">
-							{% csrf_token %}
-							<!--댓글 창-->
-							<div class="form-group">{{ comment_form | crispy }}</div>
-							<!--댓글 Summit 버튼-->
-							<div class="col-auto">
-								<button type="submit" class="btn btn-primary mb-3">댓글 달기</button>
-							</div>
-						</form>
 
 					  <form method="POST" action="{{ packagetour.get_absolute_url }}create_comment/">
 						  {% csrf_token %}
 						  <div class="form-group">
-
-							  <textarea name="comment_context" cols="40" rows="3" class="textarea form-control" style="width:80%"></textarea>
-<!--							  <input name="comment_context" type="text" style="width:90%; height:50px">-->
+							  <input name="comment_context" type="text" style="width:90%; height:50px; border-radius:5px; border-color:#ffffff;">
 							  <button type="submit" class="btn btn-primary mb-3">댓글 달기</button>
 						  </div>
 					  </form>

@@ -52,7 +52,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     # 구글 로그인 서비스
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.auth0',
+    'allauth.socialaccount.providers.kakao',
 ]
 
 

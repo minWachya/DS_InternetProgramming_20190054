@@ -35,10 +35,19 @@
                         </li>
                      <!--로그인 안 돠어져 있으면 로그인-->
                     {% else %}
+                        <!--로그인-->
                         <li class="nav-item">
                             <!-- Button trigger modal -->
-                            <a role="button" class="btn btn-primary btn-outline btn-lg" data-toggle="modal" data-target="#loginModal">
+<!--                            <a role="button" class="btn btn-primary btn-outline btn-lg" data-toggle="modal" data-target="#loginModal">-->
+                            <a href="/accounts/login/" role="button" class="btn btn-primary btn-outline btn-lg">
                                 Log In
+                            </a>
+                        </li>
+                        <!--회원가입-->
+                        <li class="nav-item">
+                            <!-- Button trigger modal -->
+                            <a href="/accounts/signup/" class="btn btn-primary btn-outline btn-lg">
+                                Sign Up
                             </a>
                         </li>
                     {% endif %}

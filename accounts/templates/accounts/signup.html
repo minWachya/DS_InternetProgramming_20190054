@@ -1,0 +1,86 @@
+{% extends 'tour/base/base_no_header.html' %}
+
+{% block nav_area %}
+    {% include 'tour/base/navbar/base_navbar_user.html' %}
+{% endblock %}
+
+<div class="container">
+{% block main_area %}
+    <div class="fh5co-hero">
+	<div class="fh5co-overlay"></div>
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2">
+		<div class="desc">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-5 col-md-5">
+						<div class="tabulation animate-box">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">회원가입</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="signup">
+									<div class="row">
+                                        <form method="POST"> {% csrf_token %}
+										<!--username-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<div class="input-field">
+                                                <label>사용자 이름:</label>
+                                                <input name="username" type="text" class="form-control" placeholder="username"/>
+                                            </div>
+										</div>
+										<!--password1-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<div class="input-field">
+                                                <label>비밀번호:</label>
+                                                <input name="password1" type="password" class="form-control" placeholder="password" style="background-color:#eeeeee; color:#F78536"/>
+                                            </div>
+										</div>
+										<!--password2-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<div class="input-field">
+                                                <label>비밀번호 확인:</label>
+                                                <input name="password2" type="password" class="form-control" placeholder="password" style="background-color:#eeeeee; color:#F78536"/>
+                                            </div>
+										</div>
+										<!--email-->
+										<div class="col-xxs-12 col-xs-12 mt">
+											<div class="input-field">
+                                                <label>이메일:</label>
+                                                <input name="email" type="text" class="form-control" placeholder="email"/>
+                                            </div>
+										</div>
+
+                                        <div class="col-xxs-12 col-xs-12 mt">
+                                            <input type="submit" class="btn btn-primary btn-block" value="회원가입 하기">
+                                        </div>
+                                        </form>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--헤더 오른쪽-->
+					<div class="desc2 animate-box">
+						<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+							<p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
+							<h2>회원가입</h2>
+							<h3>여행 가보자고를 더욱 즐기실 수 있어요!</h3>
+<!--							<span class="price">{{ packagetour.price }}</span>-->
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+</div>

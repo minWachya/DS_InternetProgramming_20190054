@@ -28,6 +28,9 @@ urlpatterns = [
     # 서버ip/my_page/~
     path('my_page/', include('my_page.urls')),
 
+    # 서버ip/accounts/~
+    path('accounts/', include('accounts.urls')),
+
     # 마크다운
     path('markdownx/', include('markdownx.urls')),
     # account

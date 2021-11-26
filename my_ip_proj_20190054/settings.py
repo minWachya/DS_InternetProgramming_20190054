@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'tour',
     'my_page',
+    'accounts',
 
     'crispy_forms',
     'markdownx',

@@ -14,8 +14,15 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li><a href="/tour/list">Package List</a></li>
-                        <li><a href="/tour/about_us">My Page</a></li>
-                        <li><a href="/tour/my_page">My Page</a></li>
+                        {% if user.is_authenticated %}
+                            {% if user.is_staff or user.is_superuser %}
+                                <li><a href="/tour/create_tour">Package Create</a></li>
+                            {% endif %}
+                        {% endif %}
+                        <li><a href="/about/me">About Me</a></li>
+                        <li><a href="/about/us">About Us</a></li>
+                        <li><a href="/accounts/signup">Sign Up</a></li>
+                        <li><a href="/accounts/login">Log In</a></li>
                     </ul>
                 </div>
 

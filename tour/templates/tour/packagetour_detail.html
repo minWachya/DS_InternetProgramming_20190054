@@ -129,7 +129,49 @@
 					</div>
 					<!--패키지 여행 이미지-->
 					<div class="col-md-6 animate-box">
+						<!--이미지-->
 						<img class="img-responsive" src="{{ packagetour.image.url }}" alt="travel">
+
+						<!--카테고리-->
+						<a href="#" class="flight-book">
+							<div class="plane-name">
+								<span class="p-flight">Category</span>
+							</div>
+							<div class="desc">
+								<div class="left">
+									<h4>{{ packagetour.category.name }}</h4>
+								</div>
+								<div class="right">
+									<span class="price">
+										<i class="icon-arrow-down22"></i>
+										$1000
+									</span>
+								</div>
+							</div>
+						</a>
+
+						<!--태그-->
+						{% if packagetour.tags.exists %}
+							{% for tag in packagetour.tags.all %}
+								<a href="#" class="flight-book">
+									<div class="plane-name">
+										<span class="p-flight">Tag</span>
+									</div>
+									<div class="desc">
+										<div class="left">
+											<h4>{{ tag.name }}</h4>
+										</div>
+										<div class="right">
+											<span class="price">
+												<i class="icon-arrow-down22"></i>
+												$1000
+											</span>
+										</div>
+									</div>
+								</a>
+							{% endfor %}
+						{% endif %}
+
 					</div>
 				</div>
 			</div>

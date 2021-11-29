@@ -35,20 +35,11 @@
                     <div class="car">
                         <div class="one-4">
                             <!--여행 정보-->
-                            <a href="{{ tour.get_absolute_url }}"><h3>{{ tour.name }}</h3></a>
-                            <p style="color:white;">{{ tour.head_text }}</p>
+                            <a href="{{ tour.get_absolute_url }}"><h3>{{ tour.name | truncatechars:14 | safe }}</h3></a>
+                            <p style="color:white;">{{ tour.head_text | truncatechars:20 | safe }}</p>
                             <p style="color:white;">{{ tour.start_day | date:"20y-m-d" }}</p>
                             <p style="color:white;">{{ tour.end_day | date:"20y-m-d" }}</p>
                             <span class="price">{{ tour.price }}<small>원</small></span>
-
-                            <!--태그-->
-                            {% if tour.tags.exists %}
-                                {% for tag in tour.tags.all %}
-                                <i class="fas fa-hashtag ml-auto">
-                                    <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
-                                </i>
-                                {% endfor %}
-                            {% endif %}
                         </div>
                         <!--이미지-->
                         <!--헤드 이미지 있을 때만 출력-->
@@ -60,6 +51,15 @@
                                 {% if tour.category %}
                                     <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
                                 {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         {% else %}
                             <!--기본 이미지-->
@@ -68,8 +68,19 @@
                                 {% if tour.category %}
                                     <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
                                 {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
                             </div>
                         {% endif %}
+
+
 
                     </div>
                 </div>

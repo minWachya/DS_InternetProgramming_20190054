@@ -10,13 +10,7 @@
 <div class="fh5co-hero">
 	<div class="fh5co-overlay"></div>
 	<!--이미지-->
-	<!--헤드 이미지 있을 때만 출력-->
-	{% if tour.head_image %}
-	<!--헤드 이미지-->
-	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url({{ packagetour.head_image.url }});">
-	{% else %}<!--기본 이미지-->
-	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url({{ packagetour.image.url }});">
-	{% endif %}
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2">
 
 		<div class="desc">
 			<div class="container">
@@ -27,7 +21,7 @@
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs" role="tablist">
 								<li role="presentation" class="active">
-									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">여행 정보</a>
+									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">문의하기</a>
 								</li>
 							</ul>
 
@@ -35,44 +29,29 @@
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="flights">
 									<div class="row">
-										<!--여행 제목-->
-										<div class="col-xxs-12 col-xs-12 mt">
-											<h3 style="color:black;">{{ packagetour.name }}</h3>
-										</div>
-										<!--여행 요약-->
-										<div class="col-xxs-12 col-xs-12 mt">
-											<p style="color:black;">
-												{{ packagetour.head_text }}
-											</p>
-										</div>
-										<!--여행 일자-->
-										<div class="col-xxs-12 col-xs-12 mt">
-											<label>여행 일자 : </label>
-											<p style="color:black;">
-												{{ packagetour.start_day | date:"20y/m/d h:m" }} ~
-												{{ packagetour.end_day | date:"20/m//d h:m"  }}
-											</p>
+										<!--이름-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>성함 : </label>
+											<input type="text" class="form-control" placeholder="성함">
 										</div>
 
-										<!--여행사-->
+										<!--이메일-->
 										<div class="col-xxs-6 col-xs-6 mt">
-											<label>여행사 : </label>
-											<div class="feature-left">
-												<p style="color:black;">{{ packagetour.agency.name }}</p>
+											<label>이메일 : </label>
+											<input type="text" class="form-control" placeholder="이메일">
+										</div>
+
+										<!--내용-->
+										<div class="col-md-12">
+											<label>문의 내용 : </label>
+											<div class="form-group">
+												<textarea name="" class="form-control" cols="30" rows="7" placeholder="문의 내용을 적어주세요." style="border-radius:5px; border-color:#ffffff; background-color:#F2EFEC;"></textarea>
 											</div>
 										</div>
 
-										<!--가격-->
-										<div class="col-xxs-6 col-xs-6 mt">
-											<label>가격 : </label>
-											<div class="feature-left">
-												<span style="color:black;">{{ packagetour.price }}<small>원</small></span>
-											</div>
-										</div>
-
-										<!--구매 버튼-->
+										<!--전송 버튼-->
 										<div class="col-xxs-12 col-xs-12 mt">
-											<input type="submit" class="btn btn-primary btn-block" value="구매하기">
+											<input type="submit" class="btn btn-primary btn-block" value="문의 메일 보내기">
 										</div>
 
 									</div>
@@ -144,6 +123,50 @@
 						</div>
 					</div>
 				</form>
+			</div>
+		</div>
+	</div>
+
+
+<div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
+		<div class="container">
+			<div class="row animate-box">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+					<h2>통계</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="fas fa-quote-right"></i></span></span>
+							<p>&ldquo;카테고리별 상품 갯수&rdquo;</p>
+						</blockquote>
+						<p class="author">이민영, CEO<span class="subtext">Creative Director</span></p>
+					</div>
+
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="fas fa-quote-right"></i></span></span>
+							<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.&rdquo;</p>
+						</blockquote>
+						<p class="author">John Doe, CEO <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+					</div>
+
+
+				</div>
+				<div class="col-md-4">
+					<div class="box-testimony animate-box">
+						<blockquote>
+							<span class="quote"><span><i class="fas fa-quote-right"></i></span></span>
+							<p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
+						</blockquote>
+						<p class="author">John Doe, Founder <a href="#">FREEHTML5.co</a> <span class="subtext">Creative Director</span></p>
+					</div>
+
+				</div>
 			</div>
 		</div>
 	</div>

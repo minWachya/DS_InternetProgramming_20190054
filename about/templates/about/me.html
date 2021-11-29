@@ -6,33 +6,75 @@
 
 {% block main_area %}
 
-<div id="fh5co-tours" class="fh5co-section-gray">
+<!--로그인 한 유저에게만 보이기-->
+{% if user.is_authenticated %}
+<div class="fh5co-hero">
+	<div class="fh5co-overlay"></div>
+	<!--이미지-->
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2">
+
+		<div class="desc">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>About Me</h3>
-						<p>사용자 정보</p>
-					</div>
-				</div>
-				<div class="row row-bottom-padded-md">
-					<div class="col-md-12 animate-box">
-						<h2 class="heading-title">
-                            <!--사용자 아바타-->
-                            <img class="quote" src='https://source.boringavatars.com/beam/120/{{ user.email }}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51' alt="{{ comment.author }}'s avatar" width="120px"/>
-                            <p>사용자 이름:{{ user.username }}</p>
-                            <p>이메일:{{ user.email }}</p>
 
-						</h2>
+					<div class="col-sm-5 col-md-5">
+						<div class="tabulation animate-box">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">내 정보</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="flights">
+									<div class="row">
+
+										<!--프로필-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<img class="quote" src='https://source.boringavatars.com/beam/120/{{ user.email }}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51' alt="{{ comment.author }}'s avatar" width="180px"/>
+										</div>
+
+                            			<!--이름-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>성함 : </label>
+											<p style="color:black;">{{ user.username }}</p>
+										</div>
+
+										<!--이메일-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>이메일 : </label>
+											<p style="color:black;">{{ user.email }}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+
+					<!--헤더 오른쪽-->
+					<div class="desc2 animate-box">
+						<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+							<p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
+							<h2>내 정보</h2>
+							<h3>이 곳에서 사용자 정보를 확인하실 수 있습니다!</h3>
+						</div>
+					</div>
+
 				</div>
 			</div>
+		</div>
 	</div>
+</div>
+
 
 		<!--댓글-->
 		<div id="fh5co-testimonial">
 			<div class="container">
 
-				<h1 style="color:white;">Comment</h1>
+				<h1 style="color:white; position: absolute; top: 20px; ">내가 단 댓글</h1>
 
 				<div class="row">
 					<!-- 댓글 있으면 출력-->
@@ -61,5 +103,26 @@
 				</div>
 			</div>
 		</div>
+
+{% else %}
+<div class="fh5co-section-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<h3>About Me</h3>
+				<p>사용자 정보</p>
+			</div>
+		</div>
+		<div class="row row-bottom-padded-md">
+			<div class="col-md-12 animate-box">
+				<h2 class="heading-title">
+					<h3>로그인 후 이용하실 수 있습니다.</h3>
+					<a href="/accounts/login/" role="button" class="btn btn-primary btn-lg">로그인하기</a>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
 
 {% endblock %}

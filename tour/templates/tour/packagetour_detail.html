@@ -140,12 +140,7 @@
 							<div class="desc">
 								<div class="left">
 									<h4>{{ packagetour.category.name }}</h4>
-								</div>
-								<div class="right">
-									<span class="price">
-										<i class="icon-arrow-down22"></i>
-										$1000
-									</span>
+									<span>Category</span>
 								</div>
 							</div>
 						</a>
@@ -160,12 +155,7 @@
 									<div class="desc">
 										<div class="left">
 											<h4>{{ tag.name }}</h4>
-										</div>
-										<div class="right">
-											<span class="price">
-												<i class="icon-arrow-down22"></i>
-												$1000
-											</span>
+											<span>Tag</span>
 										</div>
 									</div>
 								</a>
@@ -196,7 +186,6 @@
 					  </form>
 
 					{% else %}
-						<!--클릭 시 로그인 모달 창 보이기-->
 						<h2>
 							로그인 후 댓글 작성하실 수 있습니다.
 							<a href="/accounts/login/" role="button" class="btn btn-primary btn-lg">로그인하기</a>

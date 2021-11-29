@@ -13,6 +13,9 @@ urlpatterns = [
     path('logout/', views.logout),
 
     # 카카오 간편 로그인
-    path('kakao/login/', views.KakaoSignInCallBackView.as_view()),
+    path('kakaoLoginLogic/', views.kakaoLoginLogic),
+    path('kakaoLoginLogicRedirect/', views.kakaoLoginLogicRedirect),
+    path('kakaoLoginLogicRedirect/<str:q>', views.kakaoLoginLogicRedirect),
+    path('kakaoLogout/', views.kakaoLogout),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

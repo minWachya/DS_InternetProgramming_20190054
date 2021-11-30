@@ -100,54 +100,53 @@
 
 
 <div id="fh5co-contact" class="fh5co-section-gray">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-						<h3>Binary는 호남선을 소개합니다!</h3>
-						<p>20190054 이민영</p>
-					</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<h3>Binary는 호남선을 소개합니다!</h3>
+				<p>20190054 이민영</p>
+			</div>
+		</div>
+		<form action="#">
+			<div class="row animate-box">
+				<div class="col-md-6">
+					<h3 class="section-title">Our Address</h3>
+					<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					<ul class="contact-info">
+						<li><i class="icon-location-pin"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
+						<li><i class="icon-phone2"></i>+ 1235 2355 98</li>
+						<li><i class="icon-mail"></i><a href="#">info@yoursite.com</a></li>
+						<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
+					</ul>
 				</div>
-				<form action="#">
-					<div class="row animate-box">
+				<div class="col-md-6">
+					<div class="row">
 						<div class="col-md-6">
-							<h3 class="section-title">Our Address</h3>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-							<ul class="contact-info">
-								<li><i class="icon-location-pin"></i>198 West 21th Street, Suite 721 New York NY 10016</li>
-								<li><i class="icon-phone2"></i>+ 1235 2355 98</li>
-								<li><i class="icon-mail"></i><a href="#">info@yoursite.com</a></li>
-								<li><i class="icon-globe2"></i><a href="#">www.yoursite.com</a></li>
-							</ul>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Name">
+							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Name">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Email">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<input type="submit" value="Send Message" class="btn btn-primary">
-									</div>
-								</div>
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Email">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="submit" value="Send Message" class="btn btn-primary">
 							</div>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
+</div>
 
 
 <div id="fh5co-testimonial" style="background-image:url(images/img_bg_1.jpg);">
@@ -155,6 +154,16 @@
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
 					<h2>통계</h2>
+					{% if categories %}
+						<h1>{{ categories.1.packagetour_set.count }}</h1>
+					{% else %}
+						<h1>xxx</h1>
+					{% endif %}
+					<canvas id="myChart1"></canvas>
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal">
+					  Launch demo modal
+					</button>
 				</div>
 			</div>
 			<div class="row">
@@ -192,5 +201,160 @@
 			</div>
 		</div>
 	</div>
+
+
+<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-xl">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<canvas id="myChart"></canvas>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+
+<!-- 차트 -->
+  <script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+        '{{ categories.0.name }}',
+        '{{ categories.1.name }}',
+        '{{ categories.2.name }}',
+        '{{ categories.3.name }}',
+        '{{ categories.4.name }}',
+        '{{ categories.5.name }}',
+        '{{ categories.6.name }}',
+        '{{ categories.7.name }}',
+        '{{ categories.8.name }}',
+        '{{ categories.9.name }}',
+        ],
+        datasets: [{
+          label: '# of Votes',
+          data: [
+          {{ categories.0.packagetour_set.count }},
+          {{ categories.1.packagetour_set.count }},
+          {{ categories.2.packagetour_set.count }},
+          {{ categories.3.packagetour_set.count }},
+          {{ categories.4.packagetour_set.count }},
+          {{ categories.5.packagetour_set.count }},
+          {{ categories.6.packagetour_set.count }},
+          {{ categories.7.packagetour_set.count }},
+          {{ categories.8.packagetour_set.count }},
+          {{ categories.9.packagetour_set.count }},
+          ],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+
+            'rgba(25, 206, 86, 0.2)',
+            'rgba(75, 12, 192, 0.2)',
+            'rgba(153, 102, 25, 0.2)',
+            'rgba(255, 59, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+
+            'rgba(25, 206, 86, 0.2)',
+            'rgba(75, 12, 192, 0.2)',
+            'rgba(153, 102, 25, 0.2)',
+            'rgba(255, 59, 64, 0.2)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+  </script>
+
+
+<script>
+
+
+    var ctx = document.getElementById('myChart1');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [
+        '{{ categories.0.name }}',
+        '{{ categories.1.name }}',
+        '{{ categories.2.name }}',
+        '{{ categories.3.name }}',
+        '{{ categories.4.name }}',
+        '{{ categories.5.name }}',
+        ],
+        datasets: [{
+          label: '# of Votes',
+          data: [
+          {{ categories.0.packagetour_set.count }},
+          {{ categories.1.packagetour_set.count }},
+          {{ categories.2.packagetour_set.count }},
+          {{ categories.3.packagetour_set.count }},
+          {{ categories.4.packagetour_set.count }},
+          {{ categories.5.packagetour_set.count }},
+           ],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+  </script>
 
 {% endblock %}

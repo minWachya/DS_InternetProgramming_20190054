@@ -1,5 +1,27 @@
 {% load static %}
 
+.custom-shape-divider-bottom-1638458293 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1638458293 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 86px;
+    transform: rotateY(180deg);
+}
+
+.custom-shape-divider-bottom-1638458293 .shape-fill {
+    fill: #FFFFFF;
+}
+
 .custom-shape-divider-bottom-1638256844 {
     position: absolute;
     bottom: 0;

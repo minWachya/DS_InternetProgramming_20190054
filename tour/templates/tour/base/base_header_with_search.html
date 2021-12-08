@@ -1,6 +1,6 @@
 <div class="fh5co-hero">
     <div class="fh5co-overlay"></div>
-    <div class="fh5co-cover" data-stellar-background-ratio="0.5" style="background-image: url(images/cover_bg_1.jpg);">
+    <div class="fh5co-cover" data-stellar-background-ratio="0.5">
         <div class="desc">
             <div class="container">
                 <div class="row">
@@ -46,13 +46,13 @@
                                         </div>
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-start">Return:</label>
+                                                <label>Return:</label>
                                                 <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-end">Check Out:</label>
+                                                <label>Check Out:</label>
                                                 <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
                                             </div>
                                         </div>
@@ -96,72 +96,34 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--여행 가격 검색-->
                                 <div role="tabpanel" class="tab-pane" id="price">
                                     <div class="row">
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <div class="input-field">
-                                                <label>City:</label>
-                                                <input type="text" class="form-control" id="from-place" placeholder="Los Angeles, USA"/>
-                                            </div>
+
+                                        <div class="col-xxs-12 col-xs-12">
+                                            <h3 style="color:black;">원하는 가격대로 검색하세요.</h3>
                                         </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
+
+                                        <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label>Destination:</label>
-                                                <input type="text" class="form-control" id="to-place" placeholder="Tokyo, Japan"/>
+                                                <label>최저가:</label>
+                                                <input id="search-input-price1" type="text" class="form-control" placeholder="최저가를 입력하세요"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label for="date-start">Departs:</label>
-                                                <input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"/>
+                                                <label>최고가:</label>
+                                                <input id="search-input-price2" type="text" class="form-control" placeholder="최고가를 입력하세요"/>
                                             </div>
                                         </div>
-                                        <div class="col-xxs-12 col-xs-6 mt alternate">
-                                            <div class="input-field">
-                                                <label for="date-end">Return:</label>
-                                                <input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mt">
-                                            <section>
-                                                <label>Rooms:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="economy">1</option>
-                                                    <option value="first">2</option>
-                                                    <option value="business">3</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Adult:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Children:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
-                                        </div>
+
                                         <div class="col-xs-12">
-                                            <input type="submit" class="btn btn-primary btn-block" value="Search Packages">
+                                            <input type="submit" class="btn btn-primary btn-block" value="여행 가격 검색" onclick="searchPrice()">
                                         </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -176,9 +138,8 @@
                                 <h2>{{ search_info }}</h2>
                                 <h3>{{ search_info_count }}</h3>
                                 <span class="price">{{ search_info_keyword }}</span>
-                            {% endif %}
                             <!--카테고리일 때-->
-                            {% if category %}
+                            {% elif category %}
                                 <h2>{{ category }}</h2>
                                 <h3>{{ packagetour_list.count }}개의 패키지 여행이 있습니다.</h3>
                                 <span class="price">$20190054</span>

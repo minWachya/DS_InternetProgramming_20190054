@@ -113,7 +113,7 @@ class PackageTourList(ListView):
 # 여행 장소 검색
 class PackageTourSearchPlace(PackageTourList):
     # 페이지네이션 갯수
-    paginate_by = 5
+    paginate_by = 6
 
     # 검색 결과 반환
     def get_queryset(self):
@@ -130,6 +130,34 @@ class PackageTourSearchPlace(PackageTourList):
         q = self.kwargs['q']
         context['search_info'] = '여행지 장소 검색'
         context['search_info_keyword'] = f'{q}'
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
+        return context
+
+
+# 여행 가격 검색
+class PackageTourSearchPrice(PackageTourList):
+    # 페이지네이션 갯수
+    paginate_by = 6
+
+    # 검색 결과 반환
+    def get_queryset(self):
+        value = self.kwargs['value'].split('_')
+        minValue = value[0]
+        maxValue = value[1]
+        # 가격대 검색
+        packagetour_list = PackageTour.objects.filter(
+            price__range=(minValue, maxValue)
+        ).distinct() # 중복 없이
+        return packagetour_list
+
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(PackageTourSearchPrice, self).get_context_data()
+        value = self.kwargs['value'].split('_')
+        minValue = value[0]
+        maxValue = value[1]
+        context['search_info'] = '여행 가격 검색'
+        context['search_info_keyword'] = f'{minValue}원 ~ {maxValue}원'
         context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
         return context
 

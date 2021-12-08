@@ -129,7 +129,7 @@
             let searchValue = document.getElementById('search-input-place').value.trim();
             // 2자 이상만 검색되로록
             if (searchValue.length > 1)
-                location.href = "/tour/search/" + searchValue + "/";
+                location.href = "/tour/search/place/" + searchValue + "/";
             else alert('검색어(' + searchValue + ')가 너무 짧습니다.');
         };
         // 엔터 쳐도 검색 되게
@@ -139,6 +139,31 @@
             }
             )
     </script>
+
+	<script>
+		// 여행 가격 검색
+        function searchPrice() {
+            // 최저가 가져오기
+            let minValue = document.getElementById('search-input-price1').value.trim();
+            // 최고가 가져오기
+            let maxValue = document.getElementById('search-input-price2').value.trim();
+            // 2자 이상만 + 숫자만 검색되로록
+            if (minValue.length < 5 || maxValue.length < 5 || isNaN(minValue) || isNaN(maxValue))
+                alert('만원 이상부터, 숫자만 검색해주세요.');
+            else location.href = "/tour/search/price/" + minValue + "_" + maxValue + "/";
+        };
+        // 엔터 쳐도 검색 되게
+        document.getElementById('search-input-price1').addEventListener('keyup',
+            function(event) {
+                if (event.key == 'Enter') { searchPrice(); }
+            }
+            )
+        document.getElementById('search-input-price2').addEventListener('keyup',
+            function(event) {
+                if (event.key == 'Enter') { searchPrice(); }
+            }
+            )
+	</script>
 
 	</body>
 </html>

@@ -24,8 +24,12 @@ urlpatterns = [
     path('tour/create_tour/', views.PackageTourCreate.as_view()),
     # 패키지 투어 수정
     path('tour/update/<int:pk>/', views.PackageTourUpdate.as_view()),
+
     # 검색
-    path('tour/search/<str:q>/', views.PackageTourSearchPlace.as_view()),
+    # 여행 장소 검색
+    path('tour/search/place/<str:q>/', views.PackageTourSearchPlace.as_view()),
+    # 여행 가격 검색
+    path('tour/search/price/<str:value>/', views.PackageTourSearchPrice.as_view()),
 
     # 테스트
     path('tour/test', views.testTicket),

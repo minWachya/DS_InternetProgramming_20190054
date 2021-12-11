@@ -51,6 +51,38 @@ def category_page(request, slug):
                   )
 
 
+# 여행사 페이지
+def agency_page(request, name):
+    # 해당 여행사가 작성한 모든 포스트 불러오기
+    tour_list = PackageTour.objects.filter(agency__name__contains=name)
+    search_info = '여행사 검색'
+    search_info_keyword = name
+    search_info_count = '총 0건의 검색 결과'
+
+    if tour_list.count() != 0 :
+        search_info_keyword = tour_list[0].agency.name
+        search_info_count = f'총 {tour_list.count()}건의 검색 결과'
+
+
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(PackageTourSearchPlace, self).get_context_data()
+        q = self.kwargs['q']
+        context['search_info'] = '여행지 장소 검색'
+        context['search_info_keyword'] = f'{q}'
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
+        return context
+
+    return render(request, 'tour/packagetour_list.html',
+                  {
+                      'packagetour_list' : tour_list,
+                      'search_info' : search_info,
+                      'search_info_keyword' : search_info_keyword,
+                      'search_info_count' : search_info_count,
+                  }
+                  )
+
+
 # 댓글 자징하기
 def new_comment(request, pk) :
     # 로그인 되어져있는지

@@ -8,7 +8,7 @@
 								<img class="img-responsive" src="{{ tour_agencies.0.logo.url }}" alt="travel">
 							</span>
 							<div class="feature-copy">
-								<h3>{{ tour_agencies.0.name }}</h3>
+								<h3><a href="{{ tour_agencies.0.get_absolute_url }}">{{ tour_agencies.0.name }}</a></h3>
 								<p>{{ tour_agencies.0.address }}</p>
 								<p><a>{{ tour_agencies.0.contact_number }}</a></p>
 							</div>

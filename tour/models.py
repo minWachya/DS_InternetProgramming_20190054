@@ -43,7 +43,6 @@ class Category(models.Model):
 class TourAgency(models.Model) :
     # 여행사명
     name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True, null=True)
     # 주소
     address = models.CharField(max_length=300)
     # 연락처
@@ -55,7 +54,7 @@ class TourAgency(models.Model) :
         return f'[{self.pk}]{self.name}'
 
     def get_absolute_url(self):
-        return f'/tour/agency/{self.slug}'
+        return f'/tour/agency/{self.pk}'
 
 
 # 패키지 여행

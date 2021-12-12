@@ -108,7 +108,7 @@
 					<!-- 댓글 있으면 출력-->
 					{% if comment_list.exists %}
 						{% for comment in comment_list %}
-							<div class="col-lg-12 col-md-12 col-sm-12">
+							<div class="col-lg-6 col-md-12 col-sm-6">
 								<div class="box-testimony animate-box">
 									<a href="{{ comment.tour.get_absolute_url }}">
 									<blockquote>
@@ -118,15 +118,13 @@
 										<p>&ldquo;{{ comment.content }}&rdquo;</p>
 									</blockquote>
 									</a>
-									<!--작성자 + 작성 시작-->
-									<p class="author">{{ comment.author.username }}<span class="subtext">{{ comment.created_at }}</span></p>
-
+									<!--패키지 여행 정보-->
 									<p class="author">{{ comment.tour.name }}<span class="subtext">{{ comment.tour.head_text }}</span></p>
 								</div>
 							</div>
 						{% endfor %}
 					{% else %}
-						<h3>작성항 댓글이 아직 없어요~~ :(</h3>
+						<h2>작성한 댓글이 아직 없어요~~ :(</h2>
 					{% endif %}
 
 					<!--페이지네이션-->

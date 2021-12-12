@@ -18,7 +18,7 @@ class CommentList(ListView):
     paginate_by = 6
     template_name = 'about/me.html'
 
-# 여행 장소 검색
+# 사용자가 작성한 댓글만 반환
 class MyComments(CommentList):
     # 페이지네이션 갯수
     paginate_by = 6

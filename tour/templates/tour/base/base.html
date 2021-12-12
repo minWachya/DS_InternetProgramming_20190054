@@ -165,6 +165,38 @@
             )
 	</script>
 
+	<script>
+		// 여행 날짜 검색
+        function searchDate() {
+            // 여행 시작 날짜 가져오기
+            let startDate = document.getElementById('search-input-date1').value.trim();
+            // 여행 종료 날짜 가져오기
+            let endDate = document.getElementById('search-input-date2').value.trim();
+            // 10자만 검색되게 : yyyy-mm-dd && '-'가 2번 들어가는지 확인
+            if (startDate.length == 10 && endDate.length == 10 && startDate.split('-').length == 3 && endDate.split('-').length == 3) {
+            	// yyyy-mm-dd 형식 체크
+            	check1 = startDate.split('-')
+            	check2 = endDate.split('-')
+            	if (check1[0].length == 4 && check1[1].length == 2 && check1[2].length == 2
+            		&& check2[0].length == 4 && check2[1].length == 2 && check2[2].length == 2)
+            		location.href = "/tour/search/date/" + startDate + "_" + endDate + "/";
+            	else alert('yyyy-mm-dd 형식에 맞게 작성해주세요.');
+            }
+            else alert('yyyy-mm-dd 형식에 맞게 작성해주세요.');
+        };
+        // 엔터 쳐도 검색 되게
+        document.getElementById('search-input-date1').addEventListener('keyup',
+            function(event) {
+                if (event.key == 'Enter') { searchDate(); }
+            }
+            )
+        document.getElementById('search-input-date2').addEventListener('keyup',
+            function(event) {
+                if (event.key == 'Enter') { searchDate(); }
+            }
+            )
+	</script>
+
 	</body>
 </html>
 

@@ -38,62 +38,28 @@
                                 <!--여행 날짜 검색-->
                                 <div role="tabpanel" class="tab-pane" id="date">
                                     <div class="row">
-                                        <div class="col-xxs-12 col-xs-12 mt">
+
+                                        <div class="col-xxs-12 col-xs-12">
+                                            <h3 style="color:black;">원하는 날짜로 검색하세요.</h3>
+                                       </div>
+
+                                        <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label>City:</label>
-                                                <input type="text" class="form-control" placeholder="Los Angeles, USA"/>
+                                                <label>여행 시작 날짜:</label>
+                                                <input id="search-input-date1" type="text" class="form-control" placeholder="yyyy-mm-dd"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
-                                                <label>Return:</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
+                                                <label>여행 종료 날짜:</label>
+                                               <input id="search-input-date2" type="text" class="form-control" placeholder="yyyy-mm-dd"/>
                                             </div>
                                         </div>
-                                        <div class="col-xxs-12 col-xs-6 mt alternate">
-                                            <div class="input-field">
-                                                <label>Check Out:</label>
-                                                <input type="text" class="form-control" placeholder="mm/dd/yyyy"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mt">
-                                            <section>
-                                                <label>Rooms:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="economy">1</option>
-                                                    <option value="first">2</option>
-                                                    <option value="business">3</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Adult:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
-                                        </div>
-                                        <div class="col-xxs-12 col-xs-6 mt">
-                                            <section>
-                                                <label>Children:</label>
-                                                <select class="cs-select cs-skin-border">
-                                                    <option value="" disabled selected>1</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                    <option value="4">4</option>
-                                                </select>
-                                            </section>
-                                        </div>
+
                                         <div class="col-xs-12">
-                                            <input type="submit" class="btn btn-primary btn-block" value="Search Hotel">
+                                            <input type="submit" class="btn btn-primary btn-block" value="야행 날짜 검색" onclick="searchDate()">
                                         </div>
+
                                     </div>
                                 </div>
                                 <!--여행 가격 검색-->
@@ -107,13 +73,13 @@
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
                                                 <label>최저가:</label>
-                                                <input id="search-input-price1" type="text" class="form-control" placeholder="최저가를 입력하세요"/>
+                                                <input id="search-input-price1" type="text" class="form-control" placeholder="ex)10000"/>
                                             </div>
                                         </div>
                                         <div class="col-xxs-12 col-xs-6 mt alternate">
                                             <div class="input-field">
                                                 <label>최고가:</label>
-                                                <input id="search-input-price2" type="text" class="form-control" placeholder="최고가를 입력하세요"/>
+                                                <input id="search-input-price2" type="text" class="form-control" placeholder="ex)20000"/>
                                             </div>
                                         </div>
 
@@ -138,6 +104,7 @@
                                 <h2>{{ search_info }}</h2>
                                 <h3>{{ search_info_count }}</h3>
                                 <span class="price">{{ search_info_keyword }}</span>
+
                             <!--카테고리일 때-->
                             {% elif category %}
                                 <h2>{{ category }}</h2>

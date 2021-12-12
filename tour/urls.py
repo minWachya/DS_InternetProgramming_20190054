@@ -30,6 +30,8 @@ urlpatterns = [
     # 검색
     # 여행 장소 검색
     path('tour/search/place/<str:q>/', views.PackageTourSearchPlace.as_view()),
+    # 여행 날짜 검색
+    path('tour/search/date/<str:value>/', views.PackageTourSearchDate.as_view()),
     # 여행 가격 검색
     path('tour/search/price/<str:value>/', views.PackageTourSearchPrice.as_view()),
 

@@ -7,7 +7,7 @@ from django.conf import settings
 urlpatterns = [
     # FBV 방법
     # 서버ip/
-    path('me/', views.about_me),
+    path('me/<int:pk>/', views.MyComments.as_view()),
     # 회사 소개 : 서버ip/tour/about_us
     path('us/', views.about_us),
 ]

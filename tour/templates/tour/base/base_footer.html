@@ -33,7 +33,9 @@
                 <div class="col-md-2 col-sm-2 col-xs-12 fh5co-footer-link">
                     <h3>About</h3>
                     <ul>
-                        <li><a href="/about/me">About Me</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="/about/me/{{ user.pk }}">About Me</a></li>
+                        {% endif %}
                         <li><a href="/about/us">About Us</a></li>
                     </ul>
                 </div>

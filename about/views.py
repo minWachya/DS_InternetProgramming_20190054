@@ -4,14 +4,6 @@ from django.views.generic import ListView
 from django.db.models import Q
 
 # 마이 페이지
-def about_me(request):
-    comment_list = Comment.objects.filter(author__username=request.user.username)
-
-    return render(request, 'about/me.html',
-                    {
-                        'comment_list':comment_list,
-                    },
-                  )
 class CommentList(ListView):
     model = Comment
     ordering = 'created_at'

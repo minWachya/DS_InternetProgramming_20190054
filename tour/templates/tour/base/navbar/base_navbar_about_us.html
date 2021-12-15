@@ -26,12 +26,14 @@
                     <!--로그인 되어있으면 로그아웃-->
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            <a href="#" class="fh5co-sub-ddown">{{ user.username }}님! 환영합니다</a>
-                            <ul class="fh5co-sub-menu">
-                                <li><a href="/accounts/logout/">Log Out</a></li>
+                            <a class="nav-link dropdown-toggle fh5co-sub-ddown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ user.username }}님! 환영합니다  <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu fh5co-sub-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/accounts/logout/" style="font-size:1em;">Log Out</a>
                                 <!--My 페이지-->
-                                <li><a href="/about/me/{{ user.pk }}">My Page</a></li>
-                            </ul>
+                                <a class="dropdown-item" href="/about/me/{{ user.pk }}" style="font-size:1em;">My Page</a>
+                            </div>
                         </li>
                      <!--로그인 안 돠어져 있으면 로그인-->
                     {% else %}

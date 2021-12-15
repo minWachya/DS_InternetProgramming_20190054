@@ -1,58 +1,187 @@
 <!DOCTYPE html>
 {% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>덕성여자대학교 인터넷 프로그래밍-이민영</title>
+    <!--부트스트랩 적용 (장고에서 수정됨)-->
+    <!--media="screen" : screen에 보여지는 화면은 부트스트랩 사용해서 꾸며라(출력은 print)-->
+    <link href="{% static 'tour/bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="screen">
+    <!--fontawesome 킷코드-->
+    <script src="https://kit.fontawesome.com/c19d2a5456.js" crossorigin="anonymous"></script>
+</head>
+<body>
 
-<html lang="en">
-    <head>
-        <link rel="stylesheet" href="" media="screen">
-    </head>
 
-    <body>  <!-- 꾸밈 -->
-        <div id="con">
-        <div id="login">
-        <div id="login_form"><!--로그인 폼-->
+    <!--자기소개-->
+    <section>
+        <div class="container mt-4">
+            <div class="row">
 
-            <form method="post" class="post-form">
-                {% csrf_token %}
-                <h3 class="login" style="letter-spacing:-1px;">SIGN UP</h3>
-                <hr>
-                <div class="form-group">
-                    <p style="text-align: left; font-size:15px; color:#666">
-                        <label for="username">USERNAME</label>
-                    </p>
-                    <input type="text" class="form-control size" name="username" id="username"
-                           value="{{ form.username.value|default_if_none:'' }}" placeholder="아이디">
+                <!--왼쪽-->
+                <div class="col-lg-8">
+                    <h1>안녕하세요, 20190054 이민영입니다.</h1>
                 </div>
 
-                <div class="form-group">
-                    <p style="text-align: left; font-size:15px; color:#666">
-                        <label for="password1">PASSWORD</label>
-                    </p>
-                    <input type="password" class="form-control size" name="password1" id="password1"
-                           value="{{ form.password1.value|default_if_none:'' }}" placeholder="영문,숫자 포함 8자 이상 비밀번호">
+                <!--오른쪽-->
+                <div class="col-lg-4">
+                    <img class="img-fluid" src="{% static 'single_pages/images/mm2.jpg' %}">
                 </div>
 
-                <div class="form-group">
-                    <p style="text-align: left; font-size:15px; color:#666">
-                        <label for="password2">PASSWORD AGAIN</label>
-                    </p>
-                    <input type="password" class="form-control size" name="password2" id="password2"
-                           value="{{ form.password2.value|default_if_none:'' }}" placeholder="비밀번호 확인">
-                </div>
-
-                <div class="form-group">
-                    <p style="text-align: left; font-size:15px; color:#666">
-                        <label for="email">E-MAIL</label>
-                    </p>
-                    <input type="text" class="form-control size" name="email" id="email"
-                           value="{{ form.email.value|default_if_none:'' }}" placeholder="이메일">
-                </div>
-                <br/>
-                <button type="submit" class="btn btn-outline-primary">SIGN UP</button>
-            </form>
-            <hr>
-            <p class="find"><span>회원이신가요?  <a href="">Go to LOG-IN!</a></span></p>
+            </div>
         </div>
+    </section>
+
+
+    <!--포트폴리오-->
+    <section class="margin-for-footer">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>PORTFOLIO</h1>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="card" data-toggle="modal" data-target="#portfolio1">
+                        <img class="card-img-top" src="{% static 'single_pages/images/my_blog.JPG' %}">
+                        <div class="card-body">
+                            <h5 class="card-title">개발 블로그</h5>
+                            <p>알고리즘, 유니티, 안드로이드 등</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card" data-toggle="modal" data-target="#portfolio2">
+                        <img class="card-img-top" src="{% static 'single_pages/images/win.JPG' %}">
+                        <div class="card-body">
+                            <h5 class="card-title">관광공모전 장려상</h5>
+                            <p>프론트 담당</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card" data-toggle="modal" data-target="#portfolio3">
+                        <img class="card-img-top" src="{% static 'single_pages/images/ds.png' %}">
+                        <div class="card-body">
+                            <h5 class="card-title">덕성여대 컴퓨터공학과</h5>
+                            <p>수석 예정</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+    </section>
+
+    <!-- Modal 1 -->
+    <div class="modal fade" id="portfolio1" tabindex="-1" aria-labelledby="portfolioLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <!--타이틀-->
+                <h5 class="modal-title" id="portfolioLabel1">파이썬으로 통계업무 자동화하기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--내용-->
+            <div class="modal-body">
+                <div class="row">
+                    <!--왼쪽-->
+                    <div class="col-lg-7">
+                        <img class="card-img-top" src="{% static 'single_pages/images/pycon_sy_2017.png' %}">
+                    </div>
+                    <!--오른쪽-->
+                    <div class="col-lg-5">
+                        <p>Python, Django로 통계업무 자동화하기 발표</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
         </div>
-    </body>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="portfolio2" tabindex="-1" aria-labelledby="portfolioLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <!--타이틀-->
+                <h5 class="modal-title" id="portfolioLabel2">파이썬으로 통계업무 자동화하기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--내용-->
+            <div class="modal-body">
+                <div class="row">
+                    <!--왼쪽-->
+                    <div class="col-lg-7">
+                        <img class="card-img-top" src="{% static 'single_pages/images/automation_python.png' %}">
+                    </div>
+                    <!--오른쪽-->
+                    <div class="col-lg-5">
+                        <p>Python, Django로 통계업무 자동화하기 발표</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="portfolio3" tabindex="-1" aria-labelledby="portfolioLabel3" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <!--타이틀-->
+                <h5 class="modal-title" id="portfolioLabel3">파이썬으로 통계업무 자동화하기</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--내용-->
+            <div class="modal-body">
+                <div class="row">
+                    <!--왼쪽-->
+                    <div class="col-lg-7">
+                        <img class="card-img-top" src="{% static 'single_pages/images/inflearn_django2.png' %}">
+                    </div>
+                    <!--오른쪽-->
+                    <div class="col-lg-5">
+                        <p>Python, Django로 통계업무 자동화하기 발표</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--부트스트랩:자바 스크립트 코드 추가-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+
+</body>
 </html>

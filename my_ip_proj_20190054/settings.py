@@ -98,10 +98,21 @@ WSGI_APPLICATION = 'my_ip_proj_20190054.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# 데이터베이스를 PostgreSQL로 변경, 기본은 Sqllite
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE' : os.environ.get('SQL_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME' : os.environ.get('SQL_DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER' : os.environ.get('SQL_USER', 'user'),
+        'PASSWORD' : os.environ.get('SQL_PASSWORD', 'password'),
+        'HOST' : os.environ.get('SQL_HOST', 'localhost'),
+        'PORT': os.environ.get('SQL_PORT', '5432'),
     }
 }
 

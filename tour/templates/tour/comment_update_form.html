@@ -14,8 +14,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                    <h3>패키지 여행 수정하기</h3>
-                    <p>패키지 여행을 수정할 수 있습니다.</p>
+                    <h3>댓글 수정하기</h3>
+                    <p>내가 작성항 댓글을 수정할 수 있습니다.</p>
                 </div>
 
                 <div class="row row-bottom-padded-md">
@@ -26,15 +26,9 @@
 
                             {{ form | crispy }}
 
-                            <!--태그 입력 부분-->
-                            <div class="div_id_tags_str">
-                                <label for="id_tags_str">Tags:</label>
-                                <input type="text" name="tags_str" value="{{ tags_str_default }}" required id="id_tags_str" class="textinput textInput form-control">
-                            </div>
-
                             <br>
 
-                            <button type="submit" class="btn btn-primary float-right">패키지 여행 수정 완료!</button>
+                            <button type="submit" class="btn btn-primary float-right">댓글 수정 완료!</button>
                         </form>
                     </div>
                 </div>

@@ -12,6 +12,8 @@ urlpatterns = [
     # 서버ip/tour/~
     # 댓글
     path('tour/list/<int:pk>/create_comment/', views.create_comment),
+    # 댓글 수정
+    path('tour/update_comment/<int:pk>/', views.CommentUpdate.as_view()),
     # 댓글 삭제
     path('tour/delete_comment/<str:author_comment>/', views.comment_delete),
 

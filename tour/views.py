@@ -257,6 +257,20 @@ class PackageTourUpdate(LoginRequiredMixin, UpdateView):
         return response
 
 
+# 댓글 수정
+class CommentUpdate(LoginRequiredMixin, UpdateView):
+    model = Comment
+    fields = ['content']
+    template_name = 'tour/comment_update_form.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        # 로그인 되어져있는지 + 로그인된 사용자와 글 작성자가 같은지
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(CommentUpdate, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+
+
 # 패키지 여행 생성 패아지
 # 로그인 한 사람만 접근 가능 : LoginRequiredMixin
 class PackageTourCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):

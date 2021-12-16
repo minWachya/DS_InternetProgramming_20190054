@@ -25,6 +25,8 @@ urlpatterns = [
     path('tour/create_tour/', views.PackageTourCreate.as_view()),
     # 패키지 투어 수정
     path('tour/update/<int:pk>/', views.PackageTourUpdate.as_view()),
+    # 패키지 투어 삭제
+    path('tour/delete/<int:pk>/', views.PackageTourDelete.as_view()),
 
     # 검색
     # 여행 장소 검색

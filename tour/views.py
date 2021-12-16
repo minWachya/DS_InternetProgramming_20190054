@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
 from .models import PackageTour, Tag, Category, TourAgency, Comment
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
@@ -299,6 +299,13 @@ class PackageTourCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         # 로그인 안 된 사용자
         else:
             return redirect('/tour/')
+
+
+# 패키지 여행 삭제
+class PackageTourDelete(LoginRequiredMixin, DeleteView):
+    model = PackageTour
+    success_url = '/tour/list'
+    context_object_name = 'tour'
 
 
 # FBV 방법

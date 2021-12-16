@@ -115,9 +115,10 @@
 						<h2 class="heading-title">
 							여행 상세 정보
 
-							<!--수정 버튼-->
+							<!--수정, 삭제 버튼-->
 							{% if user.is_authenticated and user == packagetour.author %}
 								<button type="button" class="btn btn-primary btn-outline btn-lg" onclick="location.href='/tour/update/{{ packagetour.pk }}/'">수정</button>
+								<button type="button" class="btn btn-primary btn-outline-warning btn-lg" onclick="location.href='/tour/delete/{{ packagetour.pk }}/'">삭제</button>
 							{% endif %}
 						</h2>
 					</div>

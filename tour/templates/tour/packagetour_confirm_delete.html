@@ -1,0 +1,86 @@
+{% extends 'tour/base/base_no_header.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block head_title %}Edit Package Tour{% endblock %}
+
+{% block nav_area %}
+    {% include 'tour/base/navbar/base_navbar_list.html' %}
+{% endblock %}
+
+{% block main_area %}
+
+    <div id="fh5co-car" class="fh5co-section-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                    <h3>정말로 {{ tour.name }} 를(을) 삭제하시겠습니까?</h3>
+                    <form method="post" enctype="multipart/form-data">
+                            <!--csrf_token 반드시 입력-->
+                            {% csrf_token %}
+
+                            <button type="submit" class="btn btn-primary btn-lg" onclick="successDeleteTour()">삭제</button>
+
+                        </form>
+                </div>
+
+                <div class="row row-bottom-padded-md">
+
+                    <div class="col-md-6 col-md-offset-3 animate-box">
+                    <div class="car">
+                        <div class="one-4">
+                            <!--여행 정보-->
+                            <a href="{{ tour.get_absolute_url }}"><h3>{{ tour.name | truncatechars:14 | safe }}</h3></a>
+                            <p style="color:white;">{{ tour.head_text | truncatechars:20 | safe }}</p>
+                            <p style="color:white;">{{ tour.start_day | date:"20y-m-d" }}</p>
+                            <p style="color:white;">{{ tour.end_day | date:"20y-m-d" }}</p>
+                            <span class="price">{{ tour.price }}<small>원</small></span>
+                        </div>
+                        <!--이미지-->
+                        <!--헤드 이미지 있을 때만 출력-->
+                        {% if tour.head_image %}
+                            <!--헤드 이미지-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}
+                                    <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <!--기본 이미지-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}
+                                    <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--마크다운 사용-->
+    {{ form.media }}
+{% endblock %}

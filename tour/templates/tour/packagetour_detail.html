@@ -135,7 +135,7 @@
 						<!--카테고리-->
 						<a href="{{ packagetour.category.get_absolute_url }}" class="flight-book">
 							<div class="plane-name">
-								<span class="p-flight">Category</span>
+								<span class="p-flight"><i class="fas fa-tag"></i>&nbsp;&nbsp;Category</span>
 							</div>
 							<div class="desc">
 								<div class="left">
@@ -150,7 +150,7 @@
 							{% for tag in packagetour.tags.all %}
 								<a href="#" class="flight-book">
 									<div class="plane-name">
-										<span class="p-flight">Tag</span>
+										<span class="p-flight"><i class="fas fa-hashtag"></i>&nbsp;&nbsp;Tag</span>
 									</div>
 									<div class="desc">
 										<div class="left">

@@ -308,6 +308,19 @@ class PackageTourDelete(LoginRequiredMixin, DeleteView):
     context_object_name = 'tour'
 
 
+# 댓글 삭제
+def comment_delete(request, author_comment):
+    value = author_comment.split('_')
+    author_pk = value[0]
+    comment_pk = value[1]
+
+    comment = get_object_or_404(Comment, pk=comment_pk)
+
+    comment.delete()
+
+    return redirect(f'/about/me/{author_pk}')
+
+
 # FBV 방법
 # html 어떻게 보이는지 테스트
 def testTicket(request):

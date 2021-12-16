@@ -6,7 +6,7 @@ from django.db.models import Q
 # 마이 페이지
 class CommentList(ListView):
     model = Comment
-    ordering = 'created_at'
+    ordering = '-pk'
     paginate_by = 6
     template_name = 'about/me.html'
 
@@ -14,7 +14,7 @@ class CommentList(ListView):
 class MyComments(CommentList):
     # 페이지네이션 갯수
     paginate_by = 6
-    ordering = 'created_at'
+    ordering = '-pk'
 
     # 검색 결과 반환
     def get_queryset(self):

@@ -12,6 +12,9 @@ urlpatterns = [
     # 서버ip/tour/~
     # 댓글
     path('tour/list/<int:pk>/create_comment/', views.create_comment),
+    # 댓글 삭제
+    path('tour/delete_comment/<str:author_comment>/', views.comment_delete),
+
     # 카테고리 페이지
     path('tour/category/<str:slug>', views.category_page),
     # 여행사 페이지
@@ -24,9 +27,9 @@ urlpatterns = [
     # 패키지 투어 생성
     path('tour/create_tour/', views.PackageTourCreate.as_view()),
     # 패키지 투어 수정
-    path('tour/update/<int:pk>/', views.PackageTourUpdate.as_view()),
+    path('tour/update_tour/<int:pk>/', views.PackageTourUpdate.as_view()),
     # 패키지 투어 삭제
-    path('tour/delete/<int:pk>/', views.PackageTourDelete.as_view()),
+    path('tour/delete_tour/<int:pk>/', views.PackageTourDelete.as_view()),
 
     # 검색
     # 여행 장소 검색

@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                    <h3>정말로 {{ tour.name }} 를(을) 삭제하시겠습니까?</h3>
+                    <h3>정말로 &ldquo;{{ tour.name }}&rdquo; 를(을) 삭제하시겠습니까?</h3>
                     <form method="post" enctype="multipart/form-data">
                             <!--csrf_token 반드시 입력-->
                             {% csrf_token %}

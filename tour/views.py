@@ -2,13 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
 from .models import PackageTour, Tag, Category, TourAgency, Comment
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, FormView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
-from .forms import CommentForm, PackageTourCreateForm
+from .forms import CommentForm
 from django.db.models import Q
-
 
 # Create your views here.
 
@@ -315,6 +314,8 @@ class PackageTourCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         # 로그인 안 된 사용자
         else:
             return redirect('/tour/')
+
+
 
 
 # 패키지 여행 삭제

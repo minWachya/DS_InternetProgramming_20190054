@@ -22,7 +22,7 @@ class MyComments(CommentList):
         # 작성자가 author인 댓글만 가져오기
         comment_list = Comment.objects.filter(
             Q(author__pk=pk)
-        ).distinct() # 중복 없이
+        ).distinct().order_by('-pk') # 중복 없이
         return comment_list
 
 

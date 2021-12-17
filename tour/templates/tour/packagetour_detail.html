@@ -209,7 +209,16 @@
 										<p>&ldquo;{{ comment.content }}&rdquo;</p>
 									</blockquote>
 									<!--작성자 + 작성 시작-->
-									<p class="author">{{ comment.author.username }}<span class="subtext">{{ comment.created_at }}</span></p>
+									<p class="author">
+										{{ comment.author.username }}<span class="subtext">{{ comment.created_at }}</span>
+
+										<!--댓글 작성자는 수정/삭제 버튼 보이게-->
+										{% if user.is_authenticated and user == comment.author %}
+											<br/>
+											<a href="/tour/update_comment/{{ comment.pk }}/">수정</a>
+											<a href="/tour/delete_comment_2/{{ packagetour.pk }}_{{ comment.pk }}">삭제</a>
+										{% endif %}
+									</p>
 								</div>
 							</div>
 						{% endfor %}

@@ -323,7 +323,7 @@ class PackageTourDelete(LoginRequiredMixin, DeleteView):
 
 
 # 댓글 삭제
-def comment_delete(request, author_comment):
+def comment_delete_redirect_to_about_me(request, author_comment):
     value = author_comment.split('_')
     author_pk = value[0]
     comment_pk = value[1]
@@ -333,6 +333,17 @@ def comment_delete(request, author_comment):
     comment.delete()
 
     return redirect(f'/about/me/{author_pk}')
+
+def comment_delete_redirect_to_tour_detail(request, pk_comment):
+    value = pk_comment.split('_')
+    tour_pk = value[0]
+    comment_pk = value[1]
+
+    comment = get_object_or_404(Comment, pk=comment_pk)
+
+    comment.delete()
+
+    return redirect(f'/tour/list/{tour_pk}')
 
 
 # FBV 방법

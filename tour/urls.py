@@ -15,7 +15,8 @@ urlpatterns = [
     # 댓글 수정
     path('tour/update_comment/<int:pk>/', views.CommentUpdate.as_view()),
     # 댓글 삭제
-    path('tour/delete_comment/<str:author_comment>/', views.comment_delete),
+    path('tour/delete_comment_1/<str:author_comment>/', views.comment_delete_redirect_to_about_me),    # 삭제 후 마이페이지로 이동
+    path('tour/delete_comment_2/<str:pk_comment>/', views.comment_delete_redirect_to_tour_detail),    # 삭제 후 상세 페이지로 이동
 
     # 카테고리 페이지
     path('tour/category/<str:slug>', views.category_page),

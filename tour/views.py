@@ -128,7 +128,7 @@ class PackageTourSearchPlace(PackageTourList):
     def get_context_data(self, **kwargs):
         context = super(PackageTourSearchPlace, self).get_context_data()
         q = self.kwargs['q']
-        context['search_info'] = '여행지 장소 검색'
+        context['search_info'] = '여행 장소 검색'
         context['search_info_keyword'] = f'{q}'
         context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
         return context

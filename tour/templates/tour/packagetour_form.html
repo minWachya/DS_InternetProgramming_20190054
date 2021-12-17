@@ -23,18 +23,65 @@
                             <!--csrf_token 반드시 입력-->
                             {% csrf_token %}
 
-                            {{ form | crispy }}
-
-                            <!--태그 입력 부분-->
-                            <div class="div_id_tags_str">
-                                <label for="id_tags_str">Tags:</label>
-                                <input type="text" name="tags_str" value="{{ tags_str_default }}" required id="id_tags_str" class="textinput textInput form-control">
+                            <div class="form-row">
+                                <div class="form-group col-md-12 mb-0">
+                                    {{ form.name | as_crispy_field }}
+                                </div>
                             </div>
 
-                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-12 mb-0">
+                                    {{ form.head_text | as_crispy_field }}
+                                </div>
+                            </div>
 
-                            <button type="submit" class="btn btn-primary float-right">페키지 어행 등록!</button>
+                            <div class="form-row">
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.image | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.head_image | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.price | as_crispy_field }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6 mb-0">
+                                    {{ form.start_day | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6 mb-0">
+                                    {{ form.end_day | as_crispy_field }}
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.agency | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    {{ form.category | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-4 mb-0">
+                                    <!--태그 입력 부분-->
+                                    <div class="div_id_tags_str">
+                                        <label for="id_tags_str">Tags:</label>
+                                        <input type="text" name="tags_str" value="{{ tags_str_default }}" required id="id_tags_str" class="textinput textInput form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12 mb-0">
+                                    {{ form.content | as_crispy_field }}
+                                </div>
+                            </div>
+
+                             <button type="submit" class="btn btn-primary float-right">페키지 어행 등록!</button>
+
                         </form>
+
                     </div>
                 </div>
             </div>

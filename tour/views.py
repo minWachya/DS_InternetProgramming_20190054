@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
 from .models import PackageTour, Tag, Category, TourAgency, Comment
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
-from .forms import CommentForm
+from .forms import CommentForm, PackageTourCreateForm
 from django.db.models import Q
 
 
@@ -211,7 +211,8 @@ class PackageTourDetail(DetailView):
 # 패키지 여행 수정
 class PackageTourUpdate(LoginRequiredMixin, UpdateView):
     model = PackageTour
-    fields = ['name', 'content', 'image', 'price', 'head_image', 'head_text', 'start_day', 'end_day', 'category']
+    fields = ['name', 'content', 'image', 'price', 'head_image',
+              'head_text', 'start_day', 'end_day', 'category', 'agency']
     template_name = 'tour/packagetour_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -276,7 +277,8 @@ class CommentUpdate(LoginRequiredMixin, UpdateView):
 class PackageTourCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = PackageTour
     # created_at 은 자동이라 입력 X
-    fields = ['name', 'content', 'image', 'price', 'head_image', 'head_text', 'start_day', 'end_day', 'category']
+    fields = ['name', 'content', 'image', 'price', 'head_image',
+              'head_text', 'start_day', 'end_day', 'category', 'agency']
 
     # 로그인 한 사용자가 슈퍼유저나 스태프면 true 반환
     def test_func(self):

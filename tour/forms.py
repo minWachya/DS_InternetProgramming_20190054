@@ -1,10 +1,10 @@
-from .models import Comment
 from django import forms
+from .models import PackageTour, Comment
 
-from django.forms import Form, CharField, TextInput, \
-                PasswordInput, ChoiceField, BooleanField, DecimalField, DateTimeField
-from markdownx.utils import markdown
+from django.forms import Form, CharField, TextInput, DateTimeField, ImageField
 from markdownx.models import MarkdownxField
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column, Fieldset, Field
 
 
 # 댓글 창
@@ -16,36 +16,46 @@ class CommentForm(forms.ModelForm):
 
 
 STATES = (
-    ('', '선택하기'),
     ('kr', '대한민국'),
-    ('jp', '일본'),
 )
 
-class TourForm(Form):
-    fields = ['name', 'content', 'image', 'price', 'head_image', 'head_text',
-              'start_day', 'end_day', 'category']
+# 패키지 여행 폼
+#class PackageTourForm(Form):
 
-    name = CharField(
-        widget = TextInput(
-            attrs = {'placeholder': '패키지 투어 제목을 입력해주세요.'}
-        )
-    )
+
+class PackageTourCreateForm(Form):
+    class Meta:
+        model = PackageTour
+        fields = ['name', 'content', 'image', 'price', 'head_image', 'head_text',
+                'start_day', 'end_day', 'category']
+        labels = {
+            'name': '페키지 여행 이름',
+            'content': '내용',
+            'image': '기본 이미지',
+            'head_image': '썸네일',
+            'price': '가격',
+            'head_text': '요약',
+            'start_day': '여행 시작일',
+            'end_day': '여행 종료일',
+            }
+
+    name = CharField()
     content = MarkdownxField()
+    start_day = DateTimeField()
 
-    image = DecimalField()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field(
+                'name',
+                'content',
+                'start_day',
+            )
+        )
+        self.fields['name'].label = '패키지 여행 이름'
+        #self.fields['content'].label = '내용'
+        self.fields['start_day'].label = '여행 시작일'
+        self.helper.form_method = 'post'
 
-    address_1 = CharField(
-        label  = 'Address',
-        widget = TextInput(
-            attrs={'placeholder': '1234 Main St'}
-        )
-    )
-    address_2 = CharField(
-        widget = TextInput(
-            attrs={'placeholder': 'Apartment'}
-        )
-    )
-    city         = CharField()
-    state        = ChoiceField(choices = STATES)
-    zip_code     = CharField(label = 'Zip')
-    check_me_out = BooleanField(required = False)
+        #self.helper.add_input(Submit('Submit', 'Submit', css_class='btn-primary'))

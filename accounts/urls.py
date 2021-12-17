@@ -16,5 +16,9 @@ urlpatterns = [
     path('kakaoLoginLogic/', views.kakaoLoginLogic),
     path('kakaoLoginLogicRedirect/', views.kakaoLoginLogicRedirect),
     path('kakaoLogout/', views.kakaoLogout),
+
+    # 12-17 재시도
+    path("login/github/", views.github_login),
+    path("login/github/callback/", views.github_login_callback),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

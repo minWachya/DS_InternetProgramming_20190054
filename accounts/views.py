@@ -4,10 +4,10 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 import requests
-# Create your views here.
+
+from django.contrib import messages
 
 
 # 회원가입
@@ -92,7 +92,7 @@ def kakaoLoginLogicRedirect(request):
 
     return render(request, 'tour/index.html')
 
-def kakao_callback(request):
+def kakao_callback_old(request):
     try:
         app_rest_api_key = os.environ.get("'8a338d4b56af8cd51ead20df18bfb274'")
         redirect_uri = 'http://127.0.0.1:8000/accounts/kakaoLoginLogicRedirect'
@@ -171,3 +171,91 @@ def kakaoLogout(request):
         return render(request, 'loginoutSuccess.html')
     else:
         return render(request, 'logoutError.html')
+
+
+class SocialLoginException(Exception):
+    pass
+
+def github_login(request):
+    try:
+        client_id = 'e96fc44a56e2de6fd7e5'
+        redirect_uri = "http://127.0.0.1:8000/accounts/login/github/callback/"
+        scope = "read:user"
+        return redirect(
+            f"https://github.com/login/oauth/authorize?client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}"
+        )
+    except SocialLoginException as error:
+        messages.error(request, error)
+        return redirect("core:home")
+
+class GithubException(Exception):
+    pass
+
+def github_login_callback(request):
+    if request.user.is_authenticated:
+        raise SocialLoginException("User already logged in")
+    code = request.GET.get("code", None)
+    if code is None:
+        raise GithubException("Can't get code")
+
+    client_id = 'e96fc44a56e2de6fd7e5'
+    client_secret = '1b7c696988186274cc9b002fbd2d8c236c32b669'
+
+    token_request = requests.post(
+        f"https://github.com/login/oauth/access_token?client_id={client_id}&client_secret={client_secret}&code={code}",
+        headers={"Accept": "application/json"},
+    )
+    token_json = token_request.json()
+    error = token_json.get("error", None)
+
+    if error is not None:
+        raise GithubException("Can't get access token")
+
+    access_token = token_json.get("access_token")
+    profile_request = requests.get(
+        "https://api.github.com/user",
+        headers={
+            "Authorization": f"token {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    profile_json = profile_request.json()
+    username = profile_json.get("login", None)
+    if username is None:
+        raise GithubException("Can't get username from profile_request")
+
+    avatar_url = profile_json.get("avatar_url", None)
+    if avatar_url is None:
+        raise GithubException("Can't get avatar_url from profile_request")
+
+    name = profile_json.get("name", None)
+    if name is None:
+        raise GithubException("Can't get name from profile_request")
+
+    email = profile_json.get("email", None)
+    if email is None:
+        email = 'defalt@test.com'
+        # raise GithubException("Can't get email from profile_request")
+
+    # bio = profile_json.get("bio", None)
+    # if bio is None:
+    #     raise GithubException("Can't get bio from profile_request")
+
+    try:
+        user = User.objects.get(username=username)
+        login(request, user)
+        return redirect('/')
+
+    except:
+        user = User.objects.create(
+            username=name,
+            email=email,
+        )
+        photo_request = requests.get(avatar_url)
+
+        # user.avatar.save(f"{name}-avatar", ContentFile(photo_request.content))
+        user.set_unusable_password()
+        user.save()
+        messages.success(request, f"{user.email} logged in with Github")
+        login(request, user)
+        return redirect('/')

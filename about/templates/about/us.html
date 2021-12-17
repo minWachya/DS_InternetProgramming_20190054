@@ -137,14 +137,10 @@
 						</div>
 
 						<div class="col-md-6">
-							<div class="form-group">
-								<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal">카테고리별 게시글 수</button>
-							</div>
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal">카테고리별 게시글 수: 막대 그래프</button>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Email">
-							</div>
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal2">카테고리별 게시글 수: 원 그래프</button>
 						</div>
 
 					</div>
@@ -155,7 +151,7 @@
 </div>
 
 
-<!-- 카테고리 별 게시글 수 Modal -->
+<!-- 카테고리 별 게시글 수 Modal: 막대 그래프 -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -178,14 +174,33 @@
 	</div>
 </div>
 
+<!-- 카테고리 별 게시글 수 Modal: 원 그래프 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!--타이틀-->
+				<h5 class="modal-title" id="exampleModalLabel2">카테고리 별 게시글 수</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  		<span aria-hidden="true">&times;</span>
+				</button>
+		  	</div>
+			<!--내용-->
+		  	<div class="modal-body">
+				<canvas id="myChart2"></canvas>
+		  	</div>
 
-<!-- 차트 -->
+		  	<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 막대 차트 -->
   <script>
-    var ctx = document.getElementById('myChart');
-    var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: [
+  	labels = [
         '{{ categories.0.name }}',
         '{{ categories.1.name }}',
         '{{ categories.2.name }}',
@@ -196,10 +211,8 @@
         '{{ categories.7.name }}',
         '{{ categories.8.name }}',
         '{{ categories.9.name }}',
-        ],
-        datasets: [{
-          label: '게시글 수',
-          data: [
+        ]
+  	data = [
           {{ categories.0.packagetour_set.count }},
           {{ categories.1.packagetour_set.count }},
           {{ categories.2.packagetour_set.count }},
@@ -210,8 +223,8 @@
           {{ categories.7.packagetour_set.count }},
           {{ categories.8.packagetour_set.count }},
           {{ categories.9.packagetour_set.count }},
-          ],
-          backgroundColor: [
+          ]
+ 	backgroundColor = [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
@@ -223,8 +236,8 @@
             'rgba(75, 12, 192, 0.2)',
             'rgba(153, 102, 25, 0.2)',
             'rgba(255, 59, 64, 0.2)'
-          ],
-          borderColor: [
+          ]
+	borderColor = [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
@@ -236,65 +249,19 @@
             'rgba(75, 12, 192, 0.2)',
             'rgba(153, 102, 25, 0.2)',
             'rgba(255, 59, 64, 0.2)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
+          ]
 
-  </script>
-
-
-<script>
-
-
-    var ctx = document.getElementById('myChart1');
+	// 막대 그래프
+    var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [
-        '{{ categories.0.name }}',
-        '{{ categories.1.name }}',
-        '{{ categories.2.name }}',
-        '{{ categories.3.name }}',
-        '{{ categories.4.name }}',
-        '{{ categories.5.name }}',
-        ],
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [
-          {{ categories.0.packagetour_set.count }},
-          {{ categories.1.packagetour_set.count }},
-          {{ categories.2.packagetour_set.count }},
-          {{ categories.3.packagetour_set.count }},
-          {{ categories.4.packagetour_set.count }},
-          {{ categories.5.packagetour_set.count }},
-           ],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+          label: '게시글 수',
+          data: data,
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
           borderWidth: 1
         }]
       },
@@ -308,6 +275,24 @@
         }
       }
     });
+
+	// 원 차트
+	var ctx2 = document.getElementById("myChart2");
+	var myPieChart = new Chart(
+		ctx2, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+				  label: '게시글 수',
+				  data: data,
+				  backgroundColor: backgroundColor,
+				  borderColor: borderColor,
+				  borderWidth: 1
+				}]
+			  },
+			 options: {}
+			});
 
   </script>
 

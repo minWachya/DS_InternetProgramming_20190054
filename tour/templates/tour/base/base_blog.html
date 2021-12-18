@@ -1,4 +1,5 @@
-		<div id="fh5co-blog-section" class="fh5co-section-gray">
+{% load humanize %}
+<div id="fh5co-blog-section" class="fh5co-section-gray">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
@@ -19,7 +20,7 @@
 									<!--상품명-->
 									<h3><a href="{{ recent_tour.0.get_absolute_url }}">{{ recent_tour.0.name }}</a></h3>
 									<!--가격-->
-									<span class="posted_by">{{ recent_tour.0.price }}원</span>
+									<span class="posted_by">{{ recent_tour.0.price | intcomma }}원</span>
 									<!--댓글 수-->
 									<span class="comment"><a href="">{{ tour0_comment_count }}<i class="fas fa-comment-dots"></i></a></span>
 									<!--설명-->
@@ -39,7 +40,7 @@
 									<!--상품명-->
 									<h3><a href="{{ recent_tour.1.get_absolute_url }}">{{ recent_tour.1.name }}</a></h3>
 									<!--가격-->
-									<span class="posted_by">{{ recent_tour.1.price }}원</span>
+									<span class="posted_by">{{ recent_tour.1.price | intcomma }}원</span>
 									<!--댓글 수-->
 									<span class="comment"><a href="">{{ tour1_comment_count }}<i class="fas fa-comment-dots"></i></a></span>
 									<!--설명-->
@@ -59,7 +60,7 @@
 									<!--상품명-->
 									<h3><a href="{{ recent_tour.2.get_absolute_url }}">{{ recent_tour.2.name }}</a></h3>
 									<!--가격-->
-									<span class="posted_by">{{ recent_tour.2.price }}원</span>
+									<span class="posted_by">{{ recent_tour.2.price | intcomma }}원</span>
 									<!--댓글 수-->
 									<span class="comment"><a href="">{{ tour2_comment_count }}<i class="fas fa-comment-dots"></i></a></span>
 									<!--설명-->

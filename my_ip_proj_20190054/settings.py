@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'markdownx',
+    'django.contrib.humanize', # number fomat
 
     # 장고 all auth
     'django.contrib.sites',

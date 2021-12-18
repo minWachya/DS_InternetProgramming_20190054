@@ -20,7 +20,7 @@
 									<h3>{{ tour.name }}</h3>
 									<span>{{ tour.head_text }}</span>
 									<!--가격-->
-									<span class="price">{{ tour.price }}</span>
+									<span class="price">{{ tour.price | intcomma }}</span>
 									<a class="btn btn-primary btn-outline" href="{{ tour.get_absolute_url }}">자세히</a>
 								</div>
 							</div>

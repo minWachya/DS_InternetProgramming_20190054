@@ -1,6 +1,7 @@
 {% extends 'tour/base/base_no_header.html' %}
 
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block nav_area %}
     {% include 'tour/base/navbar/base_navbar_list.html' %}
@@ -67,7 +68,7 @@
 										<div class="col-xxs-6 col-xs-6 mt">
 											<label>가격 : </label>
 											<div class="feature-left">
-												<span style="color:black;">{{ packagetour.price }}<small>원</small></span>
+												<span style="color:black;">{{ packagetour.price | intcomma }}<small>원</small></span>
 											</div>
 										</div>
 
@@ -89,7 +90,7 @@
 							<!--여행 이름-->
 							<h2>{{ packagetour.name }}</h2>
 							<h3>{{ packagetour.agency.name }}</h3>
-							<span class="price">{{ packagetour.price }}</span>원
+							<span class="price">{{ packagetour.price | intcomma }}</span>원
 						</div>
 					</div>
 

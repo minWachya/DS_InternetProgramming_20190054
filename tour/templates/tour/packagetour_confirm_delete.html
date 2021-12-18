@@ -1,6 +1,7 @@
 {% extends 'tour/base/base_no_header.html' %}
 
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block head_title %}Edit Package Tour{% endblock %}
 
@@ -34,7 +35,7 @@
                             <p style="color:white;">{{ tour.head_text | truncatechars:20 | safe }}</p>
                             <p style="color:white;">{{ tour.agency.name }}</p>
                             <p style="color:white;">{{ tour.end_day | date:"m-d" }} ~ {{ tour.start_day | date:"m-d" }}</p>
-                            <span class="price">{{ tour.price }}<small>원</small></span>
+                            <span class="price">{{ tour.price | intcomma }}<small>원</small></span>
                         </div>
                         <!--이미지-->
                         <!--헤드 이미지 있을 때만 출력-->

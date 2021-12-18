@@ -142,7 +142,7 @@
 							<div class="desc">
 								<div class="left">
 									<h4>{{ packagetour.category.name }}</h4>
-									<span>Category</span>
+									<span>여행지</span>
 								</div>
 							</div>
 						</a>
@@ -150,14 +150,14 @@
 						<!--태그-->
 						{% if packagetour.tags.exists %}
 							{% for tag in packagetour.tags.all %}
-								<a href="#" class="flight-book">
+								<a href="{{ tag.get_absolute_url }}" class="flight-book">
 									<div class="plane-name">
 										<span class="p-flight"><i class="fas fa-hashtag"></i>&nbsp;&nbsp;Tag</span>
 									</div>
 									<div class="desc">
 										<div class="left">
 											<h4>{{ tag.name }}</h4>
-											<span>Tag</span>
+											<span>여행 종류</span>
 										</div>
 									</div>
 								</a>

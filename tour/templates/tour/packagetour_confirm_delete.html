@@ -43,15 +43,15 @@
                             <!--헤드 이미지-->
                             <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;">
                                 <!--카테고리-->
-                                {% if tour.category %}
+                                {% if tour.category %}&nbsp;
                                     <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
                                 {% endif %}
 
                                 <!--태그-->
                                 {% if tour.tags.exists %}
                                     {% for tag in tour.tags.all %}
-                                    <i class="fas fa-hashtag ml-auto">
-                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    <i class="fas fa-hashtag ml-auto" style="color:gray; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">{{ tag }}</a>
                                     </i>
                                     {% endfor %}
                                 {% endif %}

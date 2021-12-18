@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from tour.models import Comment, Category
+from tour.models import Comment, Category, TourAgency
 from django.views.generic import ListView
 from django.db.models import Q
 
@@ -33,5 +33,6 @@ def about_us(request):
     return render(request, 'about/us.html',
                   {
                       'categories': Category.objects.all(),
+                      'agencies':TourAgency.objects.all(),
                   }
                   )

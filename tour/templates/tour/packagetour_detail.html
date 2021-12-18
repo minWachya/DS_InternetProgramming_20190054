@@ -1,5 +1,7 @@
 {% extends 'tour/base/base_no_header.html' %}
 
+{% block head_title %}피카추! - {{ packagetour.name }}{% endblock %}
+
 {% load crispy_forms_tags %}
 {% load humanize %}
 
@@ -13,7 +15,7 @@
 	<div class="fh5co-overlay"></div>
 	<!--이미지-->
 	<!--헤드 이미지 있을 때만 출력-->
-	{% if tour.head_image %}
+	{% if packagetour.head_image %}
 	<!--헤드 이미지-->
 	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url({{ packagetour.head_image.url }});">
 	{% else %}<!--기본 이미지-->

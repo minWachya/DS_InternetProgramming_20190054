@@ -1,5 +1,7 @@
 {% extends 'tour/base/base_no_header.html' %}
 
+{% block head_title %}피카추! - 회사 소개{% endblock %}
+
 {% load crispy_forms_tags %}
 
 {% block nav_area %}
@@ -136,15 +138,32 @@
 							<img class="img-responsive" src="../../../../static/tour/images/jeju.JPG" alt="travel">
 							<br/>
 						</div>
-
-						<div class="col-md-6">
-							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal">카테고리별 게시글 수: 막대 그래프</button>
-						</div>
-						<div class="col-md-6">
-							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal2">카테고리별 게시글 수: 원 그래프</button>
-						</div>
-
 					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<h4><i class="fas fa-tags"></i> 카테고리별 게시글 수</h4>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal">막대 그래프</button>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal2">원 그래프</button>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<h4><i class="fas fa-plane"></i> 여행사별 게시글 수</h4>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal3">막대 그래프</button>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary center" data-toggle="modal" data-target="#exampleModal4">원 그래프</button>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</form>
@@ -158,10 +177,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<!--타이틀-->
-				<h5 class="modal-title" id="exampleModalLabel">카테고리 별 게시글 수</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  		<span aria-hidden="true">&times;</span>
-				</button>
+				<h3 class="modal-title text-center" id="exampleModalLabel"><i class="fas fa-tags"></i> 카테고리 별 게시글 수</h3>
 		  	</div>
 			<!--내용-->
 		  	<div class="modal-body">
@@ -181,14 +197,51 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<!--타이틀-->
-				<h5 class="modal-title" id="exampleModalLabel2">카테고리 별 게시글 수</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  		<span aria-hidden="true">&times;</span>
-				</button>
+				<h3 class="modal-title text-center" id="exampleModalLabel2"><i class="fas fa-tags"></i> 카테고리 별 게시글 수</h3>
 		  	</div>
 			<!--내용-->
 		  	<div class="modal-body">
 				<canvas id="myChart2"></canvas>
+		  	</div>
+
+		  	<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+<!-- 여행사별 게시글 수 Modal: 막대 그래프 -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!--타이틀-->
+				<h3 class="modal-title text-center" id="exampleModalLabel3"><i class="fas fa-plane"></i> 여행사 별 게시글 수</h3>
+		  	</div>
+			<!--내용-->
+		  	<div class="modal-body">
+				<canvas id="myChart3"></canvas>
+		  	</div>
+
+		  	<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+		  	</div>
+		</div>
+	</div>
+</div>
+
+<!-- 여행사별 게시글 수 Modal: 막대 그래프 -->
+<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!--타이틀-->
+				<h3 class="modal-title text-center" id="exampleModalLabel4"><i class="fas fa-plane"></i> 여행사 별 게시글 수</h3>
+		  	</div>
+			<!--내용-->
+		  	<div class="modal-body">
+				<canvas id="myChart4"></canvas>
 		  	</div>
 
 		  	<div class="modal-footer">
@@ -259,7 +312,7 @@
       data: {
         labels: labels,
         datasets: [{
-          label: '게시글 수',
+          label: '카테고리별 게시글 수',
           data: data,
           backgroundColor: backgroundColor,
           borderColor: borderColor,
@@ -285,7 +338,7 @@
 			data: {
 				labels: labels,
 				datasets: [{
-				  label: '게시글 수',
+				  label: '카테고리별 게시글 수',
 				  data: data,
 				  backgroundColor: backgroundColor,
 				  borderColor: borderColor,
@@ -296,5 +349,83 @@
 			});
 
   </script>
+
+<script>
+	labels = [
+        '{{ agencies.0.name }}',
+        '{{ agencies.1.name }}',
+        '{{ agencies.2.name }}',
+        '{{ agencies.3.name }}',
+        '{{ agencies.4.name }}',
+        '{{ agencies.5.name }}',
+        ]
+  	data = [
+          {{ agencies.0.packagetour_set.count }},
+          {{ agencies.1.packagetour_set.count }},
+          {{ agencies.2.packagetour_set.count }},
+          {{ agencies.3.packagetour_set.count }},
+          {{ agencies.4.packagetour_set.count }},
+          {{ agencies.5.packagetour_set.count }},
+          ]
+ 	backgroundColor = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ]
+	borderColor = [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+          ]
+
+	// 막대 그래프
+    var ctx = document.getElementById('myChart3');
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '여행사별 게시글 수',
+          data: data,
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+
+    // 원 차트
+	var ctx2 = document.getElementById("myChart4");
+	var myPieChart = new Chart(
+		ctx2, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+				  label: '여행사별 게시글 수',
+				  data: data,
+				  backgroundColor: backgroundColor,
+				  borderColor: borderColor,
+				  borderWidth: 1
+				}]
+			  },
+			 options: {}
+			});
+</script>
 
 {% endblock %}

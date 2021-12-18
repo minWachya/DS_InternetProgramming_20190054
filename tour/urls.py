@@ -22,6 +22,8 @@ urlpatterns = [
     path('tour/category/<str:slug>', views.category_page),
     # 여행사 페이지
     path('tour/agency/<str:pk>', views.agency_page),
+    # 태그 페이지
+    path('tour/tag/<str:slug>', views.tag_page),
 
     # 패키지 투어 목록 : 서버ip/tour/list
     path('tour/list', views.PackageTourList.as_view()),

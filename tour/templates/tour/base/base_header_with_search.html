@@ -105,11 +105,18 @@
                                 <h3>{{ search_info_count }}</h3>
                                 <span class="price">{{ search_info_keyword }}</span>
 
-                            <!--카테고리일 때-->
+                            <!--카테고리 검색일 때-->
                             {% elif category %}
                                 <h2>{{ category }}</h2>
                                 <h3>{{ packagetour_list.count }}개의 패키지 여행이 있습니다.</h3>
                                 <span class="price">$20190054</span>
+
+                            <!--태그 검색일 때-->
+                            {% elif tag %}
+                                <h2>{{ tag }}</h2>
+                                <h3>{{ packagetour_list.count }}개의 패키지 여행이 있습니다.</h3>
+                                <span class="price">$20190054</span>
+
                             {% else %}
                                 <h2>자! 이제 시작이야✨</h2>
                                 <h3>내 꿈을 위한 여행,피카추 <i class="fas fa-bolt"></i></h3>

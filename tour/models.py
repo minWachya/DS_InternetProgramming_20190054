@@ -16,8 +16,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-    # def get_absolute_url(self):
-    #     return f'/tour/tag/{self.slug}'
+    def get_absolute_url(self):
+        return f'/tour/tag/{self.slug}'
 
 
 # 카테고리

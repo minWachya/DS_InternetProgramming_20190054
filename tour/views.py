@@ -72,6 +72,19 @@ def agency_page(request, pk):
                   }
                   )
 
+# 태그 페이지
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    # 태그가 있는 모든 포스트 불러오기(다대다 관계)
+    tour_list = PackageTour.objects.filter(tags__in=[tag])
+
+    return render(request, 'tour/packagetour_list.html',
+                  {
+                      'packagetour_list': tour_list,
+                      'tag': tag,
+                  }
+                  )
+
 
 # 댓글 자징하기
 def create_comment(request, pk):

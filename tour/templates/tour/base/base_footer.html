@@ -35,6 +35,7 @@
                     <ul>
                         {% if user.is_authenticated %}
                             <li><a href="/about/me/{{ user.pk }}">About Me</a></li>
+                            <li><a href="/about/me/like/{{ user.pk }}">My Likes</a></li>
                         {% endif %}
                         <li><a href="/about/us">About Us</a></li>
                     </ul>

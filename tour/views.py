@@ -146,18 +146,6 @@ class PackageTourList(ListView):
     ordering = '-pk'
     # 페이지네이션 갯수
     paginate_by = 6
-
-    # 카테고리 데이터 가져오기
-    def get_context_data(self, *, object_list=None, **kwargs):
-        # 상위 context를 사용하겠다.
-        context = super(PackageTourList, self).get_context_data()
-        # 카테고리 값 모두 가져오기
-        context['categories'] = Category.objects.all()
-        # 카테고리 없는 포스트 갯수
-        context['no_category_post_count'] = PackageTour.objects.filter(category=None).count()
-        return context
-
-
 # 여행 장소 검색
 class PackageTourSearchPlace(PackageTourList):
     # 페이지네이션 갯수
@@ -395,6 +383,19 @@ def comment_delete_redirect_to_tour_detail(request, pk_comment):
     comment.delete()
 
     return redirect(f'/tour/list/{tour_pk}')
+
+
+# 좋아요
+def like_post(request, pk):
+    if request.user.is_authenticated:
+        tour = get_object_or_404(PackageTour, pk=pk)
+        if request.user in tour.like_users.all():
+            tour.like_users.remove(request.user)
+        else:
+            tour.like_users.add(request.user)
+        return redirect(f'/tour/list/{pk}')
+    else:
+        return redirect(f'/accounts/login/')
 
 
 # FBV 방법

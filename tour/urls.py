@@ -36,6 +36,9 @@ urlpatterns = [
     # 패키지 투어 삭제
     path('tour/delete_tour/<int:pk>/', views.PackageTourDelete.as_view()),
 
+    # 좋아요
+    path('tour/like/<int:pk>/', views.like_post, name="like_post"),
+
     # 검색
     # 여행 장소 검색
     path('tour/search/place/<str:q>/', views.PackageTourSearchPlace.as_view()),

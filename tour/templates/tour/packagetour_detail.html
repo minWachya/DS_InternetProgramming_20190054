@@ -75,8 +75,23 @@
 										</div>
 
 										<!--구매 버튼-->
-										<div class="col-xxs-12 col-xs-12 mt">
+										<div class="col-xxs-8 col-xs-8 mt">
 											<input type="submit" class="btn btn-primary btn-block" value="구매하기">
+										</div>
+										<!--좋아요 버튼-->
+										<div class="col-xxs-3 col-xs-3 mt">
+											<!--로그인 한 사용자만 사용 가능-->
+										{% if user.is_authenticated %}
+											<button type="button" class="btn btn-primary btn-outline-warning btn-lg" onclick="location.href='/tour/like/{{ packagetour.pk }}/'">
+												{% if user in packagetour.like_users.all %}
+													<i class="fas fa-heart"></i>	<!--채워진 하트-->
+												{% else %}
+													<i class="far fa-heart"></i> <!--빈하트-->
+												{% endif %}
+											</button>
+										{% else %}
+											<button type="button" class="btn btn-primary btn-outline-warning btn-lg" onclick="location.href='/accounts/login'"><i class="far fa-heart"></i></button>
+										{% endif %}
 										</div>
 
 									</div>

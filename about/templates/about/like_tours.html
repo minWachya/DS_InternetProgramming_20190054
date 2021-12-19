@@ -1,0 +1,239 @@
+{% extends 'tour/base/base_no_header.html' %}
+
+{% block head_title %}피카추! - My페이지{% endblock %}
+
+{% load humanize %}
+
+{% block nav_area %}
+    {% include 'tour/base/navbar/base_navbar_user.html' %}
+{% endblock %}
+
+{% block main_area %}
+
+<!--로그인 한 유저에게만 보이기-->
+{% if user.is_authenticated %}
+<div class="fh5co-hero">
+	<div class="fh5co-overlay"></div>
+	<!--이미지-->
+	<div class="fh5co-cover" data-stellar-background-ratio="0.2" style="background-image: url(../../../../static/tour/images/back_3.png);">
+
+		<div class="desc">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-sm-5 col-md-5">
+						<div class="tabulation animate-box">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#flights" aria-controls="flights" role="tab" data-toggle="tab">내 정보</a>
+								</li>
+							</ul>
+
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="flights">
+									<div class="row">
+
+										<!--프로필-->
+										<!--소셜 계정 있으면 아바타 보이기-->
+										{% if user.socialaccount_set.all.0.get_avatar_url %}
+											<div class="col-xxs-6 col-xs-6 mt">
+												<img class="quote img-circle" src='{{ user.socialaccount_set.all.0.get_avatar_url }}' alt="{{ user.username }}'s avatar" width="180px"/>
+											</div>
+										{% else %}
+											<div class="col-xxs-6 col-xs-6 mt">
+												<img class="quote" src='https://source.boringavatars.com/beam/120/{{ user.email }}?colors=264653,2a9d8f,e9c46a,f4a261,e76f51' alt="{{ user.username }}'s avatar" width="180px"/>
+											</div>
+										{% endif %}
+
+
+                            			<!--이름-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>성함 : </label>
+											<p style="color:black;">{{ user.username }}</p>
+										</div>
+
+										<!--이메일-->
+										<div class="col-xxs-6 col-xs-6 mt">
+											<label>이메일 : </label>
+											<p style="color:black;">{{ user.email }}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--헤더 오른쪽-->
+					<div class="desc2 animate-box">
+						<div class="col-sm-7 col-sm-push-1 col-md-7 col-md-push-1">
+							<p>Internet Programming <a href="https://github.com/minWachya/DS_InternetProgramming_20190054" target="_blank" class="fh5co-site-name">minWachya</a></p>
+							<h2>좋아요 목록🧡</h2>
+							<h3>내가 하트를 누른 여행들을 확인하세요!</h3>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<!--svg-->
+			<div class="custom-shape-divider-bottom-1638276798"
+			style="position: absolute;
+					bottom: -168%;
+					left: 0;
+					width: 100%;
+					overflow: hidden;
+					line-height: 0;
+					transform: rotate(180deg);">
+				<svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"
+				style="position: relative;
+						display: block;
+						width: calc(100% + 1.3px);
+						height: 114px;">
+					<path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill" style="fill: #F5F5F5;"></path>
+				</svg>
+			</div>
+			<!--svg-->
+
+		</div>
+	</div>
+</div>
+
+{% else %}
+<div class="fh5co-section-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+				<h3>좋아요 목록🧡</h3>
+				<p>엇...? 로그인을...? 안 하셨...?</p>
+			</div>
+		</div>
+		<div class="row row-bottom-padded-md">
+			<div class="col-md-12 animate-box">
+				<h2 class="heading-title">
+					<h3>로그인 후 이용하실 수 있습니다.</h3>
+					<a href="/accounts/login/" role="button" class="btn btn-primary btn-lg">로그인하기</a>
+				</h2>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+
+
+<!--패키지 여행이 있으면-->
+    {% if packagetour_list.exists %}
+
+        <div id="fh5co-car" class="fh5co-section-gray">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                            <h3>좋아요 목록🧡</h3>
+                            <p>좋아요 표시를 한 패키지 여행이 보여집니다.</p>
+                        </div>
+                    </div>
+
+                <!--패키지 갯수만큼 반복하기-->
+                {% for tour in packagetour_list %}
+                <div class="col-md-6 animate-box">
+                    <div class="car">
+                        <div class="one-4">
+                            <!--여행 정보-->
+                            <a href="{{ tour.get_absolute_url }}"><h3>{{ tour.name | truncatechars:14 | safe }}</h3></a>
+                            <p style="color:white;">{{ tour.head_text | truncatechars:20 | safe }}</p>
+                            <p style="color:white;">{{ tour.agency.name }}</p>
+                            <p style="color:white;">{{ tour.end_day | date:"m-d" }} ~ {{ tour.start_day | date:"m-d" }}</p>
+                            <span class="price">{{ tour.price | intcomma }}<small>원</small></span>
+                        </div>
+                        <!--이미지-->
+                        <!--헤드 이미지 있을 때만 출력-->
+                        {% if tour.head_image %}
+                            <!--헤드 이미지-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.head_image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}&nbsp;
+                                    <span class="badge rounded-pill"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto" style="color:gray; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray; text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <!--기본 이미지-->
+                            <div class="one-1 img-tumbnail" style="background-image: url({{ tour.image.url }}); overflow: hidden;">
+                                <!--카테고리-->
+                                {% if tour.category %}
+                                    <span class="badge rounded-pill bg-warning text-dark"><a href="{{ tour.category.get_absolute_url }}">{{ tour.category }}</a></span>
+                                {% endif %}
+
+                                <!--태그-->
+                                {% if tour.tags.exists %}
+                                    {% for tag in tour.tags.all %}
+                                    <i class="fas fa-hashtag ml-auto">
+                                        <a href="{{ tag.get_absolute_url }}" style="color:gray;">{{ tag }}</a>
+                                    </i>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endif %}
+
+
+
+                    </div>
+                </div>
+                {% endfor %}
+
+                <!--페이지네이션-->
+                <!--다 보여줄 페이지가 있으면 페이지네이션 보이기-->
+                {% if is_paginated %}
+                <div class="col-md-12 text-center animate-box">
+                    <!--보여줄 이전 페이지가 있으면 페이지네이션 보이기-->
+                    {% if page_obj.has_previous %}
+                    <a class="btn btn-primary btn-outline btn-lg" href="?page={{ page_obj.previous_page_number }}"><i class="fas fa-arrow-left"></i>이전 페이지</a>
+                    <!--없으면 비활성화-->
+                    {% else %}
+                    <a class="btn btn-primary btn-outline btn-lg disabled" href="#"><i class="fas fa-arrow-left"></i>이전 페이지</a>
+                    {% endif %}
+
+                    <!--보여줄 다음 페이지가 있으면 페이지네이션 보이기-->
+                    {% if page_obj.has_next %}
+                    <a class="btn btn-primary btn-outline btn-lg" href="?page={{ page_obj.next_page_number }}">다음 페이지<i class="fas fa-arrow-right"></i></a>
+                    <!--없으면 비활성화-->
+                    {% else %}
+                    <a class="btn btn-primary btn-outline btn-lg disabled" href="#">다음 페이지<i class="fas fa-arrow-right"></i></a>
+                    {% endif %}
+                </div>
+				{% endif %}
+			</div>
+		</div>
+    {% else %}
+        <div id="fh5co-tours" class="fh5co-section-gray">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+						<h3>좋아요를 누른 여행이 없어요 :(</h3>
+						<p>관심 있는 패키지 여행을 찾아 🧡를 눌러주세요!</p>
+					</div>
+
+                    <div class="row">
+						<div class="col-md-8 col-md-offset-2 text-center animate-box">
+							<!--이미지-->
+							<img src="../../../../static/tour/images/sad_picachu.png" alt="error img : pikachu" width="50%">
+						</div>
+				    </div>
+
+				</div>
+			</div>
+		</div>
+    {% endif %}
+
+{% endblock %}

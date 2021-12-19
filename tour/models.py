@@ -84,6 +84,8 @@ class PackageTour(models.Model) :
     # 작성자
     # CASCADE : User 삭제 시 작성한 모든 포스트도 delete + null=True
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # 좋아요한 유저
+    like_users = models.ManyToManyField(User, related_name="like_posts", blank=True)
 
     def __str__(self):
         return f'[{self.pk}]{self.name}'

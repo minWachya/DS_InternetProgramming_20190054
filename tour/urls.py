@@ -19,11 +19,11 @@ urlpatterns = [
     path('tour/delete_comment_2/<str:pk_comment>/', views.comment_delete_redirect_to_tour_detail),    # 삭제 후 상세 페이지로 이동
 
     # 카테고리 페이지
-    path('tour/category/<str:slug>', views.category_page),
+    path('tour/category/<str:slug>', views.CategoryPage.as_view()),
     # 여행사 페이지
-    path('tour/agency/<str:pk>', views.agency_page),
+    path('tour/agency/<str:pk>', views.AgencyPage.as_view()),
     # 태그 페이지
-    path('tour/tag/<str:slug>', views.tag_page),
+    path('tour/tag/<str:slug>', views.TagPage.as_view()),
 
     # 패키지 투어 목록 : 서버ip/tour/list
     path('tour/list', views.PackageTourList.as_view()),

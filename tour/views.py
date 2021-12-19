@@ -32,58 +32,93 @@ def index(request):
 
 
 # 카테고리 페이지
-def category_page(request, slug):
-    if slug == 'no_category':
-        category = '미분류'
-        tour_liat = PackageTour.objects.filter(category=None)
-    else :
+class CategoryList(ListView):
+    model = Category
+    ordering = '-pk'
+    paginate_by = 6
+    template_name = 'tour/packagetour_list.html.html'
+class CategoryPage(CategoryList):
+    # 페이지네이션 갯수
+    paginate_by = 6
+    ordering = '-pk'
+
+    # 검색 결과 반환
+    def get_queryset(self):
+        slug = self.kwargs['slug']
         category = Category.objects.get(slug=slug)
         # 카테고리 있는 모든 포스트 불러오기(다대일 관계)
         tour_list = PackageTour.objects.filter(category=category)
+        return tour_list
 
-    return render(request, 'tour/packagetour_list.html',
-                  {
-                      'packagetour_list' : tour_list,
-                      'categories' : Category.objects.all(),
-                      'category' : category,
-                  }
-                  )
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(CategoryPage, self).get_context_data()
+        slug = self.kwargs['slug']
+        category = Category.objects.get(slug=slug)
+        context['search_info'] = '카테고리 검색'
+        context['search_info_keyword'] = category.name
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
+        return context
 
 
 # 여행사 페이지
-def agency_page(request, pk):
-    # 해당 여행사가 작성한 모든 포스트 불러오기
-    tour_list = PackageTour.objects.filter(agency=pk)
-    search_info = '여행사 검색'
-    agency = TourAgency.objects.filter(pk=pk)
-    search_info_keyword = '오류!'
-    search_info_count = '총 0건의 검색 결과'
+class AgencyList(ListView):
+    model = TourAgency
+    ordering = '-pk'
+    paginate_by = 6
+    template_name = 'tour/packagetour_list.html.html'
+class AgencyPage(AgencyList):
+    # 페이지네이션 갯수
+    paginate_by = 6
+    ordering = '-pk'
 
-    if tour_list.count() != 0 :
+    # 검색 결과 반환
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        # 해당 여행사가 작성한 모든 포스트 불러오기
+        tour_list = PackageTour.objects.filter(agency=pk)
+        return tour_list
+
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(AgencyPage, self).get_context_data()
+        pk = self.kwargs['pk']
+        agency = TourAgency.objects.filter(pk=pk)
         search_info_keyword = agency[0].name
-        search_info_count = f'총 {tour_list.count()}건의 검색 결과'
+        context['search_info'] = '여행사 검색'
+        context['search_info_keyword'] = search_info_keyword
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
+        return context
 
-    return render(request, 'tour/packagetour_list.html',
-                  {
-                      'packagetour_list' : tour_list,
-                      'search_info' : search_info,
-                      'search_info_keyword' : search_info_keyword,
-                      'search_info_count' : search_info_count,
-                  }
-                  )
 
 # 태그 페이지
-def tag_page(request, slug):
-    tag = Tag.objects.get(slug=slug)
-    # 태그가 있는 모든 포스트 불러오기(다대다 관계)
-    tour_list = PackageTour.objects.filter(tags__in=[tag])
+class TagList(ListView):
+    model = Tag
+    ordering = '-pk'
+    paginate_by = 6
+    template_name = 'tour/packagetour_list.html.html'
+class TagPage(TagList):
+    # 페이지네이션 갯수
+    paginate_by = 6
+    ordering = '-pk'
 
-    return render(request, 'tour/packagetour_list.html',
-                  {
-                      'packagetour_list': tour_list,
-                      'tag': tag,
-                  }
-                  )
+    # 검색 결과 반환
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        tag = Tag.objects.get(slug=slug)
+        # 태그가 있는 모든 포스트 불러오기(다대다 관계)
+        tour_list = tag.packagetour_set.all() #PackageTour.objects.filter(tags__in=[tag])
+        return tour_list
+
+    # 추가적으로 전당할 데이터
+    def get_context_data(self, **kwargs):
+        context = super(TagPage, self).get_context_data()
+        slug = self.kwargs['slug']
+        tag = Tag.objects.get(slug=slug)
+        context['search_info'] = '태그 검색'
+        context['search_info_keyword'] = tag.name
+        context['search_info_count'] = f'총 {self.get_queryset().count()}건의 검색 결과'
+        return context
 
 
 # 댓글 자징하기
